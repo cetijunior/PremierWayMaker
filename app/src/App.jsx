@@ -1,9 +1,33 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import './i18n';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Apply from './pages/Apply';
 import Success from './pages/Success';
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/apply/:type" element={<Apply />} />
+          <Route path="/success" element={<Success />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
 
 export default function App() {
   return (
@@ -11,11 +35,7 @@ export default function App() {
       <div className="min-h-screen flex flex-col bg-cream">
         <Navbar />
         <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/apply/:type" element={<Apply />} />
-            <Route path="/success" element={<Success />} />
-          </Routes>
+          <AnimatedRoutes />
         </main>
         <Footer />
       </div>

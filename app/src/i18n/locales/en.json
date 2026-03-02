@@ -1,0 +1,101 @@
+{
+  "nav": {
+    "home": "Home",
+    "apply": "Apply",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Premier Way Maker",
+    "subtitle": "Your Expert Guide to Job & Visa Applications in Albania and Abroad.",
+    "cta_apply": "Apply Now",
+    "cta_learn": "Learn More"
+  },
+  "services": {
+    "heading": "What We Offer",
+    "subtitle": "We specialize in placing skilled workers in high-demand sectors across Albania and abroad.",
+    "construction": {
+      "title": "Construction Jobs",
+      "desc": "Full support for local job placement, documentation, and residency."
+    },
+    "hospitality": {
+      "title": "Hospitality Positions",
+      "desc": "Hotels, restaurants, resorts, and catering positions across Albania."
+    },
+    "tech": {
+      "title": "IT & Tech Roles",
+      "desc": "Attractive term contracts in technologies and IT tech work roles."
+    },
+    "healthcare": {
+      "title": "Healthcare Careers",
+      "desc": "Expert guidance for work permits and healthcare visa applications."
+    }
+  },
+  "apply_section": {
+    "heading": "Apply Now",
+    "subtitle": "Choose the application type that matches your current location.",
+    "inside": {
+      "label": "Inside Albania",
+      "subtitle": "Jobs & Residency",
+      "desc": "Full support for local job placement, documentation, and residency.",
+      "price": "€50"
+    },
+    "outside": {
+      "label": "Outside Albania",
+      "subtitle": "Work Visas & Permits",
+      "desc": "Expert guidance for work permits and visa applications in the EU, USA, and beyond.",
+      "price": "€200"
+    },
+    "cta": "Apply Now — {{price}}"
+  },
+  "contact": {
+    "heading": "Contact Us",
+    "subtitle": "Reach out to us anytime — we're here to help.",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "address_label": "Address",
+    "phone_label": "Phone"
+  },
+  "footer": {
+    "tagline": "Your Expert Guide to Job & Visa Applications in Albania and Abroad.",
+    "quick_links": "Quick Links",
+    "contact_info": "Contact Info",
+    "follow_us": "Follow Us",
+    "copyright": "© {{year}} Premier Way Maker. All rights reserved."
+  },
+  "apply_page": {
+    "title": "Apply — {{type}}",
+    "fee": "Application Fee: {{price}}",
+    "invalid": "Invalid application type",
+    "go_home": "Go Home",
+    "back": "Back to Home"
+  },
+  "form": {
+    "full_name": "Full Name",
+    "full_name_placeholder": "Your full name",
+    "email": "Email",
+    "email_placeholder": "you@example.com",
+    "phone": "Phone Number",
+    "phone_placeholder": "+355 69 123 4567",
+    "cv_label": "Upload CV (PDF, DOC, DOCX)",
+    "cv_drag": "Drag & Drop your CV here, or",
+    "cv_browse": "browse",
+    "submit": "Pay {{price}} & Submit",
+    "processing": "Processing..."
+  },
+  "success": {
+    "loading": "Loading...",
+    "error_title": "Something went wrong",
+    "error_message": "We couldn't find your application. Please contact us for help.",
+    "title": "Application Confirmed!",
+    "thank_you": "Thank you, <strong>{{name}}</strong>. Your application for <strong>{{type}}</strong> has been received.",
+    "payment_success": "Payment of <strong>€{{amount}}</strong> Successful.",
+    "payment_status": "Payment status:",
+    "amount": "Amount:",
+    "type": "Type:",
+    "inside": "Inside Albania",
+    "outside": "Outside Albania",
+    "receipt_note": "A receipt and further instructions have been sent to your email. Our team will review your CV shortly.",
+    "back": "Back to Home"
+  }
+}

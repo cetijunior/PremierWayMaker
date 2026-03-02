@@ -1,0 +1,101 @@
+{
+  "nav": {
+    "home": "Home",
+    "apply": "Mag-apply",
+    "contact": "Makipag-ugnayan"
+  },
+  "hero": {
+    "title": "Premier Way Maker",
+    "subtitle": "Ang iyong dalubhasang gabay sa mga aplikasyon ng trabaho at visa sa Albania at sa ibang bansa.",
+    "cta_apply": "Mag-apply Ngayon",
+    "cta_learn": "Alamin Pa"
+  },
+  "services": {
+    "heading": "Ano ang Aming Iniaalok",
+    "subtitle": "Dalubhasa kami sa paglalagay ng mga bihasang manggagawa sa mga sektor na may mataas na demand sa Albania at sa ibang bansa.",
+    "construction": {
+      "title": "Mga Trabaho sa Konstruksiyon",
+      "desc": "Buong suporta para sa lokal na paglalagay sa trabaho, dokumentasyon, at residensiya."
+    },
+    "hospitality": {
+      "title": "Mga Posisyon sa Hospitality",
+      "desc": "Mga hotel, restaurant, resort, at posisyon sa catering sa buong Albania."
+    },
+    "tech": {
+      "title": "Mga Papel sa IT at Teknolohiya",
+      "desc": "Kaakit-akit na mga kontrata sa teknolohiya at mga papel na IT."
+    },
+    "healthcare": {
+      "title": "Mga Karera sa Kalusugan",
+      "desc": "Dalubhasang gabay para sa mga work permit at aplikasyon ng visa sa healthcare."
+    }
+  },
+  "apply_section": {
+    "heading": "Mag-apply Ngayon",
+    "subtitle": "Piliin ang uri ng aplikasyon na tumutugma sa iyong kasalukuyang lokasyon.",
+    "inside": {
+      "label": "Sa Loob ng Albania",
+      "subtitle": "Mga Trabaho at Residensiya",
+      "desc": "Buong suporta para sa lokal na paglalagay sa trabaho, dokumentasyon, at residensiya.",
+      "price": "€50"
+    },
+    "outside": {
+      "label": "Sa Labas ng Albania",
+      "subtitle": "Mga Work Visa at Permit",
+      "desc": "Dalubhasang gabay para sa mga work permit at aplikasyon ng visa sa EU, USA, at iba pa.",
+      "price": "€200"
+    },
+    "cta": "Mag-apply Ngayon — {{price}}"
+  },
+  "contact": {
+    "heading": "Makipag-ugnayan",
+    "subtitle": "Makipag-ugnayan sa amin anumang oras — nandito kami para tumulong.",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "address_label": "Address",
+    "phone_label": "Telepono"
+  },
+  "footer": {
+    "tagline": "Ang iyong dalubhasang gabay sa mga aplikasyon ng trabaho at visa sa Albania at sa ibang bansa.",
+    "quick_links": "Mga Mabilis na Link",
+    "contact_info": "Impormasyon sa Pakikipag-ugnayan",
+    "follow_us": "Sundan Kami",
+    "copyright": "© {{year}} Premier Way Maker. Lahat ng karapatan ay nakalaan."
+  },
+  "apply_page": {
+    "title": "Mag-apply — {{type}}",
+    "fee": "Bayad sa Aplikasyon: {{price}}",
+    "invalid": "Hindi wastong uri ng aplikasyon",
+    "go_home": "Bumalik sa Home",
+    "back": "Bumalik sa Home"
+  },
+  "form": {
+    "full_name": "Buong Pangalan",
+    "full_name_placeholder": "Ang iyong buong pangalan",
+    "email": "Email",
+    "email_placeholder": "ikaw@halimbawa.com",
+    "phone": "Numero ng Telepono",
+    "phone_placeholder": "+355 69 123 4567",
+    "cv_label": "I-upload ang CV (PDF, DOC, DOCX)",
+    "cv_drag": "I-drag at I-drop ang iyong CV dito, o",
+    "cv_browse": "mag-browse",
+    "submit": "Magbayad {{price}} at Isumite",
+    "processing": "Pinoproseso..."
+  },
+  "success": {
+    "loading": "Naglo-load...",
+    "error_title": "May nangyaring mali",
+    "error_message": "Hindi namin mahanap ang iyong aplikasyon. Mangyaring makipag-ugnayan sa amin para sa tulong.",
+    "title": "Nakumpirma ang Aplikasyon!",
+    "thank_you": "Salamat, <strong>{{name}}</strong>. Ang iyong aplikasyon para sa <strong>{{type}}</strong> ay natanggap na.",
+    "payment_success": "Matagumpay ang bayad na <strong>€{{amount}}</strong>.",
+    "payment_status": "Status ng bayad:",
+    "amount": "Halaga:",
+    "type": "Uri:",
+    "inside": "Sa Loob ng Albania",
+    "outside": "Sa Labas ng Albania",
+    "receipt_note": "Isang resibo at karagdagang mga tagubilin ay ipinadala sa iyong email. Susuriin ng aming koponan ang iyong CV sa lalong madaling panahon.",
+    "back": "Bumalik sa Home"
+  }
+}

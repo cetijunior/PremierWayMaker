@@ -1,0 +1,101 @@
+{
+  "nav": {
+    "home": "Kryefaqja",
+    "apply": "Apliko",
+    "contact": "Kontakti"
+  },
+  "hero": {
+    "title": "Premier Way Maker",
+    "subtitle": "Udhëzuesi juaj ekspert për aplikime pune dhe viza në Shqipëri dhe jashtë.",
+    "cta_apply": "Apliko Tani",
+    "cta_learn": "Mëso Më Shumë"
+  },
+  "services": {
+    "heading": "Çfarë Ofrojmë",
+    "subtitle": "Ne specializohemi në vendosjen e punëtorëve të aftë në sektorë me kërkesë të lartë në Shqipëri dhe jashtë.",
+    "construction": {
+      "title": "Punë Ndërtimi",
+      "desc": "Mbështetje e plotë për vendosjen në punë, dokumentacionin dhe rezidencën."
+    },
+    "hospitality": {
+      "title": "Pozicione Hotelerike",
+      "desc": "Hotele, restorante, resorte dhe pozicione katering në të gjithë Shqipërinë."
+    },
+    "tech": {
+      "title": "Role IT & Teknologji",
+      "desc": "Kontrata tërheqëse në teknologji dhe role pune IT."
+    },
+    "healthcare": {
+      "title": "Karriera Shëndetësore",
+      "desc": "Udhëzim ekspert për leje pune dhe aplikime vizash shëndetësore."
+    }
+  },
+  "apply_section": {
+    "heading": "Apliko Tani",
+    "subtitle": "Zgjidhni llojin e aplikimit që përputhet me vendndodhjen tuaj aktuale.",
+    "inside": {
+      "label": "Brenda Shqipërisë",
+      "subtitle": "Punë & Rezidencë",
+      "desc": "Mbështetje e plotë për vendosjen në punë, dokumentacionin dhe rezidencën.",
+      "price": "€50"
+    },
+    "outside": {
+      "label": "Jashtë Shqipërisë",
+      "subtitle": "Viza & Leje Pune",
+      "desc": "Udhëzim ekspert për leje pune dhe aplikime vizash në BE, SHBA dhe më gjerë.",
+      "price": "€200"
+    },
+    "cta": "Apliko Tani — {{price}}"
+  },
+  "contact": {
+    "heading": "Na Kontaktoni",
+    "subtitle": "Na kontaktoni në çdo kohë — jemi këtu për t'ju ndihmuar.",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "address_label": "Adresa",
+    "phone_label": "Telefoni"
+  },
+  "footer": {
+    "tagline": "Udhëzuesi juaj ekspert për aplikime pune dhe viza në Shqipëri dhe jashtë.",
+    "quick_links": "Lidhje të Shpejta",
+    "contact_info": "Informacioni i Kontaktit",
+    "follow_us": "Na Ndiqni",
+    "copyright": "© {{year}} Premier Way Maker. Të gjitha të drejtat e rezervuara."
+  },
+  "apply_page": {
+    "title": "Apliko — {{type}}",
+    "fee": "Tarifa e Aplikimit: {{price}}",
+    "invalid": "Lloj aplikimi i pavlefshëm",
+    "go_home": "Kthehu në Kryefaqe",
+    "back": "Kthehu në Kryefaqe"
+  },
+  "form": {
+    "full_name": "Emri i Plotë",
+    "full_name_placeholder": "Emri juaj i plotë",
+    "email": "Email",
+    "email_placeholder": "ju@shembull.com",
+    "phone": "Numri i Telefonit",
+    "phone_placeholder": "+355 69 123 4567",
+    "cv_label": "Ngarko CV (PDF, DOC, DOCX)",
+    "cv_drag": "Tërhiq & Lësho CV-në tuaj këtu, ose",
+    "cv_browse": "shfleto",
+    "submit": "Paguaj {{price}} & Dërgo",
+    "processing": "Duke procesuar..."
+  },
+  "success": {
+    "loading": "Duke ngarkuar...",
+    "error_title": "Diçka shkoi keq",
+    "error_message": "Nuk mund ta gjenim aplikimin tuaj. Ju lutemi na kontaktoni për ndihmë.",
+    "title": "Aplikimi u Konfirmua!",
+    "thank_you": "Faleminderit, <strong>{{name}}</strong>. Aplikimi juaj për <strong>{{type}}</strong> është pranuar.",
+    "payment_success": "Pagesa e <strong>€{{amount}}</strong> e Suksesshme.",
+    "payment_status": "Statusi i pagesës:",
+    "amount": "Shuma:",
+    "type": "Lloji:",
+    "inside": "Brenda Shqipërisë",
+    "outside": "Jashtë Shqipërisë",
+    "receipt_note": "Një faturë dhe udhëzime të mëtejshme janë dërguar në email-in tuaj. Ekipi ynë do ta shqyrtojë CV-në tuaj së shpejti.",
+    "back": "Kthehu në Kryefaqe"
+  }
+}

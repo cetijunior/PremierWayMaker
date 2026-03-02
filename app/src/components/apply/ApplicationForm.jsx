@@ -1,6 +1,18 @@
+import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+import { HiUser, HiEnvelope, HiPhone } from 'react-icons/hi2';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
 import FileUpload from './FileUpload';
+
+const fieldVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, delay: i * 0.08, ease: 'easeOut' },
+  }),
+};
 
 export default function ApplicationForm({
   form,
@@ -11,49 +23,68 @@ export default function ApplicationForm({
   onFileSelect,
   onSubmit,
 }) {
+  const { t } = useTranslation();
+
   return (
     <form onSubmit={onSubmit}>
       {error && (
-        <div className="bg-red-50 text-red-600 px-3.5 py-2.5 rounded-lg mb-4 text-sm">
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-red-50 text-red-600 px-4 py-3 rounded-xl mb-6 text-sm font-medium border border-red-100"
+        >
           {error}
-        </div>
+        </motion.div>
       )}
 
-      <Input
-        label="Full Name"
-        id="fullName"
-        name="fullName"
-        type="text"
-        value={form.fullName}
-        onChange={onFieldChange}
-        placeholder="Your full name"
-      />
+      <motion.div custom={0} variants={fieldVariants} initial="hidden" animate="visible">
+        <Input
+          label={t('form.full_name')}
+          id="fullName"
+          name="fullName"
+          type="text"
+          value={form.fullName}
+          onChange={onFieldChange}
+          placeholder={t('form.full_name_placeholder')}
+          icon={<HiUser className="w-5 h-5" />}
+        />
+      </motion.div>
 
-      <Input
-        label="Email"
-        id="email"
-        name="email"
-        type="email"
-        value={form.email}
-        onChange={onFieldChange}
-        placeholder="you@example.com"
-      />
+      <motion.div custom={1} variants={fieldVariants} initial="hidden" animate="visible">
+        <Input
+          label={t('form.email')}
+          id="email"
+          name="email"
+          type="email"
+          value={form.email}
+          onChange={onFieldChange}
+          placeholder={t('form.email_placeholder')}
+          icon={<HiEnvelope className="w-5 h-5" />}
+        />
+      </motion.div>
 
-      <Input
-        label="Phone Number"
-        id="phone"
-        name="phone"
-        type="tel"
-        value={form.phone}
-        onChange={onFieldChange}
-        placeholder="+355 69 123 4567"
-      />
+      <motion.div custom={2} variants={fieldVariants} initial="hidden" animate="visible">
+        <Input
+          label={t('form.phone')}
+          id="phone"
+          name="phone"
+          type="tel"
+          value={form.phone}
+          onChange={onFieldChange}
+          placeholder={t('form.phone_placeholder')}
+          icon={<HiPhone className="w-5 h-5" />}
+        />
+      </motion.div>
 
-      <FileUpload onFileSelect={onFileSelect} />
+      <motion.div custom={3} variants={fieldVariants} initial="hidden" animate="visible">
+        <FileUpload onFileSelect={onFileSelect} />
+      </motion.div>
 
-      <Button type="submit" className="w-full" disabled={loading}>
-        {loading ? 'Processing...' : `Pay ${priceLabel} & Submit`}
-      </Button>
+      <motion.div custom={4} variants={fieldVariants} initial="hidden" animate="visible">
+        <Button type="submit" className="w-full py-3.5 text-base" disabled={loading}>
+          {loading ? t('form.processing') : t('form.submit', { price: priceLabel })}
+        </Button>
+      </motion.div>
     </form>
   );
 }
