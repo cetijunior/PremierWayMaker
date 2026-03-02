@@ -1,6 +1,0 @@
-node_modules/
-dist/
-.env
-api/uploads/
-*.log
-.DS_Store
