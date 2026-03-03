@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { submitApplication } from '../services/api';
 
 export function useApplicationForm(type) {
-  const [form, setForm] = useState({ fullName: '', email: '', phone: '' });
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ fullName: '', email: '', phone: '', bookingDate: '' });
   const [cv, setCv] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -19,7 +21,7 @@ export function useApplicationForm(type) {
     e.preventDefault();
     setError('');
 
-    if (!form.fullName || !form.email || !form.phone) {
+    if (!form.fullName || !form.email || !form.phone || !form.bookingDate) {
       return setError('Please fill in all fields.');
     }
     if (!cv) {
@@ -33,10 +35,11 @@ export function useApplicationForm(type) {
       data.append('email', form.email);
       data.append('phone', form.phone);
       data.append('type', type);
+      data.append('bookingDate', form.bookingDate);
       data.append('cv', cv);
 
       const result = await submitApplication(data);
-      window.location.href = result.url;
+      navigate('/payment', { state: { clientSecret: result.clientSecret, type } });
     } catch (err) {
       setError(err.message);
       setLoading(false);

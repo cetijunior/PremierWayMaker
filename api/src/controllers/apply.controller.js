@@ -4,7 +4,7 @@ const ApiError = require('../utils/ApiError');
 
 async function submitApplication(req, res, next) {
   try {
-    const { fullName, email, phone, type } = req.body;
+    const { fullName, email, phone, type, bookingDate } = req.body;
     const amount = stripeService.getAmountInEuros(type);
 
     const application = await Application.create({
@@ -12,6 +12,7 @@ async function submitApplication(req, res, next) {
       email,
       phone,
       type,
+      bookingDate: new Date(bookingDate),
       cvPath: req.file.filename,
       amount,
     });
@@ -26,7 +27,7 @@ async function submitApplication(req, res, next) {
     application.stripeSessionId = session.id;
     await application.save();
 
-    res.json({ url: session.url });
+    res.json({ clientSecret: session.client_secret });
   } catch (err) {
     next(err);
   }
@@ -47,6 +48,7 @@ async function getApplicationStatus(req, res, next) {
       type: application.type,
       amount: application.amount,
       paymentStatus: application.paymentStatus,
+      bookingDate: application.bookingDate,
     });
   } catch (err) {
     next(err);

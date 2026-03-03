@@ -7,7 +7,7 @@ async function createCheckoutSession({ application, type, fullName, email }) {
   const amount = PRICES[type];
 
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
+    ui_mode: 'embedded',
     line_items: [
       {
         price_data: {
@@ -22,8 +22,7 @@ async function createCheckoutSession({ application, type, fullName, email }) {
       },
     ],
     mode: 'payment',
-    success_url: `${env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${env.CLIENT_URL}/apply/${type}`,
+    return_url: `${env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
     customer_email: email,
     metadata: { applicationId: application._id.toString() },
   });

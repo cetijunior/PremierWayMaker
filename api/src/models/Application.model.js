@@ -6,6 +6,7 @@ const applicationSchema = new mongoose.Schema({
   phone: { type: String, required: true },
   type: { type: String, enum: ['inside', 'outside'], required: true },
   cvPath: { type: String, required: true },
+  bookingDate: { type: Date, required: true },
   amount: { type: Number, required: true },
   paymentStatus: {
     type: String,

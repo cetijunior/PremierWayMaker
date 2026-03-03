@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { HiUser, HiEnvelope, HiPhone } from 'react-icons/hi2';
 import Input from '../ui/Input';
+import DatePicker from '../ui/DatePicker';
 import Button from '../ui/Button';
 import FileUpload from './FileUpload';
 
@@ -77,10 +78,21 @@ export default function ApplicationForm({
       </motion.div>
 
       <motion.div custom={3} variants={fieldVariants} initial="hidden" animate="visible">
-        <FileUpload onFileSelect={onFileSelect} />
+        <DatePicker
+          label={t('form.booking_date')}
+          id="bookingDate"
+          name="bookingDate"
+          value={form.bookingDate}
+          onChange={onFieldChange}
+          min={new Date().toISOString().split('T')[0]}
+        />
       </motion.div>
 
       <motion.div custom={4} variants={fieldVariants} initial="hidden" animate="visible">
+        <FileUpload onFileSelect={onFileSelect} />
+      </motion.div>
+
+      <motion.div custom={5} variants={fieldVariants} initial="hidden" animate="visible">
         <Button type="submit" className="w-full py-3.5 text-base" disabled={loading}>
           {loading ? t('form.processing') : t('form.submit', { price: priceLabel })}
         </Button>

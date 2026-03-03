@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
@@ -12,6 +13,10 @@ const ICONS = { inside: HiMapPin, outside: HiGlobeAlt };
 export default function Apply() {
   const { t } = useTranslation();
   const { type } = useParams();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [type]);
   const config = APPLICATION_TYPES[type];
   const {
     form,

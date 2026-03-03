@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiBars3, HiXMark } from 'react-icons/hi2';
@@ -13,10 +13,6 @@ export default function Navbar() {
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
 
-  const links = [
-    { to: '/apply/inside', label: t('nav.apply') },
-  ];
-
   function handleHomeClick(e) {
     e.preventDefault();
     setMobileOpen(false);
@@ -29,8 +25,12 @@ export default function Navbar() {
 
   function scrollToSection(id) {
     setMobileOpen(false);
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (isHome) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/', { state: { scrollTo: id } });
+    }
   }
 
   return (
@@ -58,23 +58,18 @@ export default function Navbar() {
             >
               {t('nav.home')}
             </a>
-            {links.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="text-white/80 text-sm font-medium hover:text-gold transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all hover:after:w-full"
-              >
-                {link.label}
-              </Link>
-            ))}
-            {isHome && (
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="text-white/80 text-sm font-medium hover:text-gold transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all hover:after:w-full"
-              >
-                {t('nav.contact')}
-              </button>
-            )}
+            <button
+              onClick={() => scrollToSection('apply')}
+              className="text-white/80 text-sm font-medium hover:text-gold transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all hover:after:w-full"
+            >
+              {t('nav.apply')}
+            </button>
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="text-white/80 text-sm font-medium hover:text-gold transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all hover:after:w-full"
+            >
+              {t('nav.contact')}
+            </button>
             <LanguageSwitcher />
           </div>
 
@@ -126,24 +121,18 @@ export default function Navbar() {
                 >
                   {t('nav.home')}
                 </a>
-                {links.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    onClick={() => setMobileOpen(false)}
-                    className="text-white/80 hover:text-gold hover:bg-white/5 px-4 py-3 rounded-lg transition-colors font-medium"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                {isHome && (
-                  <button
-                    onClick={() => scrollToSection('contact')}
-                    className="text-left text-white/80 hover:text-gold hover:bg-white/5 px-4 py-3 rounded-lg transition-colors font-medium"
-                  >
-                    {t('nav.contact')}
-                  </button>
-                )}
+                <button
+                  onClick={() => scrollToSection('apply')}
+                  className="text-left text-white/80 hover:text-gold hover:bg-white/5 px-4 py-3 rounded-lg transition-colors font-medium"
+                >
+                  {t('nav.apply')}
+                </button>
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="text-left text-white/80 hover:text-gold hover:bg-white/5 px-4 py-3 rounded-lg transition-colors font-medium"
+                >
+                  {t('nav.contact')}
+                </button>
               </div>
             </motion.div>
           </>

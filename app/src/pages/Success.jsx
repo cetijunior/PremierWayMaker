@@ -104,6 +104,12 @@ export default function Success() {
           <p className="text-sm text-text-light mt-1">
             <strong className="text-navy">{t('success.type')}</strong> {typeName}
           </p>
+          {data.bookingDate && (
+            <p className="text-sm text-text-light mt-1">
+              <strong className="text-navy">{t('success.booking_date')}</strong>{' '}
+              {new Date(data.bookingDate).toLocaleDateString()}
+            </p>
+          )}
         </motion.div>
 
         <motion.div

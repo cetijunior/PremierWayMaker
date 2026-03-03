@@ -77,11 +77,17 @@
     "email_placeholder": "ju@shembull.com",
     "phone": "Numri i Telefonit",
     "phone_placeholder": "+355 69 123 4567",
+    "booking_date": "Data e Takimit",
     "cv_label": "Ngarko CV (PDF, DOC, DOCX)",
     "cv_drag": "Tërhiq & Lësho CV-në tuaj këtu, ose",
     "cv_browse": "shfleto",
     "submit": "Paguaj {{price}} & Dërgo",
     "processing": "Duke procesuar..."
+  },
+  "payment": {
+    "title": "Përfundo Pagesën",
+    "subtitle": "Aplikimi juaj është ruajtur. Përfundoni pagesën më poshtë për ta finalizuar.",
+    "back": "Kthehu te Aplikimi"
   },
   "success": {
     "loading": "Duke ngarkuar...",
@@ -93,6 +99,7 @@
     "payment_status": "Statusi i pagesës:",
     "amount": "Shuma:",
     "type": "Lloji:",
+    "booking_date": "Data e Takimit:",
     "inside": "Brenda Shqipërisë",
     "outside": "Jashtë Shqipërisë",
     "receipt_note": "Një faturë dhe udhëzime të mëtejshme janë dërguar në email-in tuaj. Ekipi ynë do ta shqyrtojë CV-në tuaj së shpejti.",

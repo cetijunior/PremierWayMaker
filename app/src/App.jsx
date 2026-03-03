@@ -5,6 +5,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Apply from './pages/Apply';
+import Payment from './pages/Payment';
 import Success from './pages/Success';
 
 function AnimatedRoutes() {
@@ -22,6 +23,7 @@ function AnimatedRoutes() {
         <Routes location={location}>
           <Route path="/" element={<Home />} />
           <Route path="/apply/:type" element={<Apply />} />
+          <Route path="/payment" element={<Payment />} />
           <Route path="/success" element={<Success />} />
         </Routes>
       </motion.div>

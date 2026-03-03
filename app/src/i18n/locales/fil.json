@@ -77,11 +77,17 @@
     "email_placeholder": "ikaw@halimbawa.com",
     "phone": "Numero ng Telepono",
     "phone_placeholder": "+355 69 123 4567",
+    "booking_date": "Petsa ng Appointment",
     "cv_label": "I-upload ang CV (PDF, DOC, DOCX)",
     "cv_drag": "I-drag at I-drop ang iyong CV dito, o",
     "cv_browse": "mag-browse",
     "submit": "Magbayad {{price}} at Isumite",
     "processing": "Pinoproseso..."
+  },
+  "payment": {
+    "title": "Kumpletuhin ang Bayad",
+    "subtitle": "Nai-save na ang iyong aplikasyon. Kumpletuhin ang bayad sa ibaba para tapusin.",
+    "back": "Bumalik sa Aplikasyon"
   },
   "success": {
     "loading": "Naglo-load...",
@@ -93,6 +99,7 @@
     "payment_status": "Status ng bayad:",
     "amount": "Halaga:",
     "type": "Uri:",
+    "booking_date": "Petsa ng Appointment:",
     "inside": "Sa Loob ng Albania",
     "outside": "Sa Labas ng Albania",
     "receipt_note": "Isang resibo at karagdagang mga tagubilin ay ipinadala sa iyong email. Susuriin ng aming koponan ang iyong CV sa lalong madaling panahon.",

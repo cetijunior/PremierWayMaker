@@ -77,11 +77,17 @@
     "email_placeholder": "you@example.com",
     "phone": "Phone Number",
     "phone_placeholder": "+355 69 123 4567",
+    "booking_date": "Appointment Date",
     "cv_label": "Upload CV (PDF, DOC, DOCX)",
     "cv_drag": "Drag & Drop your CV here, or",
     "cv_browse": "browse",
     "submit": "Pay {{price}} & Submit",
     "processing": "Processing..."
+  },
+  "payment": {
+    "title": "Complete Payment",
+    "subtitle": "Your application has been saved. Complete the payment below to finalize.",
+    "back": "Back to Application"
   },
   "success": {
     "loading": "Loading...",
@@ -93,6 +99,7 @@
     "payment_status": "Payment status:",
     "amount": "Amount:",
     "type": "Type:",
+    "booking_date": "Appointment Date:",
     "inside": "Inside Albania",
     "outside": "Outside Albania",
     "receipt_note": "A receipt and further instructions have been sent to your email. Our team will review your CV shortly.",

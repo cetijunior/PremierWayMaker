@@ -1,7 +1,7 @@
 import { Table, TableHead, TableHeader, TableBody } from '../ui/Table';
 import ApplicationRow from './ApplicationRow';
 
-const COLUMNS = ['Name', 'Email', 'Phone', 'Type', 'Amount', 'Status', 'Date', 'Actions'];
+const COLUMNS = ['Name', 'Email', 'Phone', 'Type', 'Amount', 'Status', 'Booking', 'Date', 'Actions'];
 
 export default function ApplicationTable({ applications, onDownloadCv, onDelete }) {
   if (applications.length === 0) {

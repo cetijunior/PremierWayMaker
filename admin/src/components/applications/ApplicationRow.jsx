@@ -13,6 +13,9 @@ export default function ApplicationRow({ app, onDownloadCv, onDelete }) {
       <TableCell>
         <Badge status={app.paymentStatus} />
       </TableCell>
+      <TableCell>
+        {app.bookingDate ? new Date(app.bookingDate).toLocaleDateString() : '—'}
+      </TableCell>
       <TableCell>{new Date(app.createdAt).toLocaleDateString()}</TableCell>
       <TableCell>
         <div className="flex gap-1.5">
