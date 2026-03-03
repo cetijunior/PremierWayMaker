@@ -7,7 +7,7 @@ import Dashboard from './pages/Dashboard';
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/admin">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route element={<AdminLayout />}>
