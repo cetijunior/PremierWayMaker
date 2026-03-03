@@ -1,5 +1,6 @@
 const { Application } = require('../models');
 const stripeService = require('../services/stripe.service');
+const storageService = require('../services/storage.service');
 const ApiError = require('../utils/ApiError');
 
 async function submitApplication(req, res, next) {
@@ -7,13 +8,15 @@ async function submitApplication(req, res, next) {
     const { fullName, email, phone, type, bookingDate } = req.body;
     const amount = stripeService.getAmountInEuros(type);
 
+    const cvPath = await storageService.saveCv(req.file.buffer, req.file.originalname);
+
     const application = await Application.create({
       fullName,
       email,
       phone,
       type,
       bookingDate: new Date(bookingDate),
-      cvPath: req.file.filename,
+      cvPath,
       amount,
     });
 

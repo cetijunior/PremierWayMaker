@@ -21,6 +21,7 @@ export const SERVICES = [
   },
 ];
 
+// Keep prices in sync with api/src/constants/pricing.js (inside: 50, outside: 200)
 export const APPLICATION_TYPES = {
   inside: {
     label: 'Inside Albania',

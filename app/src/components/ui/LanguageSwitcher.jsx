@@ -8,7 +8,7 @@ const LANGUAGES = [
   { code: 'fil', label: 'FIL', flag: '🇵🇭' },
 ];
 
-export default function LanguageSwitcher({ compact = false }) {
+export default function LanguageSwitcher({ compact: _compact = false }) {
   const { i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);

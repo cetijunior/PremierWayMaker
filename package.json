@@ -1,0 +1,21 @@
+{
+  "name": "p_way_maker",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Job and visa application platform for Albania. Public-facing app for applicants, admin dashboard for managing applications, and API backend with Stripe payments.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.1"
+  }
+}

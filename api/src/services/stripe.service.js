@@ -1,10 +1,9 @@
 const stripe = require('../config/stripe');
 const env = require('../config/env');
-
-const PRICES = { inside: 5000, outside: 20000 };
+const { PRICES_CENTS } = require('../constants/pricing');
 
 async function createCheckoutSession({ application, type, fullName, email }) {
-  const amount = PRICES[type];
+  const amount = PRICES_CENTS[type];
 
   const session = await stripe.checkout.sessions.create({
     ui_mode: 'embedded',
@@ -35,12 +34,11 @@ function constructWebhookEvent(body, signature) {
 }
 
 function getAmountInEuros(type) {
-  return PRICES[type] / 100;
+  return PRICES_CENTS[type] / 100;
 }
 
 module.exports = {
   createCheckoutSession,
   constructWebhookEvent,
   getAmountInEuros,
-  PRICES,
 };

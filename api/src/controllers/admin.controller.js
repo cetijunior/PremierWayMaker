@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 const { Admin, Application } = require('../models');
 const env = require('../config/env');
+const storageService = require('../services/storage.service');
 const ApiError = require('../utils/ApiError');
 
 async function login(req, res, next) {
@@ -45,11 +46,16 @@ async function downloadCv(req, res, next) {
     const application = await Application.findById(req.params.id);
     if (!application) throw new ApiError(404, 'Application not found');
 
-    const filePath = path.resolve(__dirname, '../../uploads', application.cvPath);
+    const cvData = await storageService.getCvDownload(application.cvPath);
+    if (!cvData) throw new ApiError(404, 'CV file not found');
+
     const ext = path.extname(application.cvPath);
     const safeName = application.fullName.replace(/\s+/g, '_');
+    const filename = `CV-${safeName}${ext}`;
 
-    res.download(filePath, `CV-${safeName}${ext}`);
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    if (cvData.contentType) res.setHeader('Content-Type', cvData.contentType);
+    cvData.stream.pipe(res);
   } catch (err) {
     next(err);
   }
