@@ -28,7 +28,7 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F4F1EC] px-5">
+    <div className="min-h-screen flex items-center justify-center bg-[#F4F1EC] px-4 sm:px-5 py-6">
       <div className="w-full max-w-sm">
         <h2 className="text-center text-2xl font-bold text-[#1B2A4A] mb-6">
           Admin Login

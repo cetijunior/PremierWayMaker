@@ -1,6 +1,7 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchApplications, deleteApplication, getCvDownloadUrl } from '../services/api';
+import { SEED_APPLICATIONS } from '../data/seedApplications';
 import ApplicationFilters from '../components/applications/ApplicationFilters';
 import ApplicationTable from '../components/applications/ApplicationTable';
 
@@ -10,6 +11,15 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [filterType, setFilterType] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
+  const [useSeedData, setUseSeedData] = useState(false);
+
+  const filteredSeed = useMemo(() => {
+    return SEED_APPLICATIONS.filter((a) => {
+      if (filterType && a.type !== filterType) return false;
+      if (filterStatus && a.paymentStatus !== filterStatus) return false;
+      return true;
+    });
+  }, [filterType, filterStatus]);
 
   const loadApps = useCallback(async () => {
     setLoading(true);
@@ -19,14 +29,19 @@ export default function Dashboard() {
         status: filterStatus,
       });
       setApps(data);
+      setUseSeedData(false);
     } catch (err) {
       if (err.message === 'Unauthorized') {
         navigate('/login');
+      } else {
+        // API unavailable (e.g. demo deployment) – use seed data
+        setUseSeedData(true);
+        setApps(filteredSeed);
       }
     } finally {
       setLoading(false);
     }
-  }, [filterType, filterStatus, navigate]);
+  }, [filterType, filterStatus, navigate, filteredSeed]);
 
   useEffect(() => {
     loadApps();
@@ -34,17 +49,22 @@ export default function Dashboard() {
 
   async function handleDelete(id) {
     if (!confirm('Delete this application?')) return;
-    await deleteApplication(id);
+    try {
+      await deleteApplication(id);
+    } catch {
+      // Ignore when API unavailable (demo mode)
+    }
     setApps((prev) => prev.filter((a) => a._id !== id));
   }
 
   function handleDownloadCv(id) {
+    if (useSeedData) return; // No real CV in demo
     window.open(getCvDownloadUrl(id), '_blank');
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold text-[#1B2A4A] mb-5">Applications</h2>
+    <div className="min-w-0">
+      <h2 className="text-xl sm:text-2xl font-bold text-[#1B2A4A] mb-4 sm:mb-5">Applications</h2>
 
       <ApplicationFilters
         filterType={filterType}
@@ -60,6 +80,7 @@ export default function Dashboard() {
           applications={apps}
           onDownloadCv={handleDownloadCv}
           onDelete={handleDelete}
+          isDemo={useSeedData}
         />
       )}
     </div>

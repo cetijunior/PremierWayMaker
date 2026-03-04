@@ -18,7 +18,7 @@ export default function ApplicationFilters({
   onStatusChange,
 }) {
   return (
-    <div className="flex gap-3 flex-wrap mb-5">
+    <div className="flex gap-2 sm:gap-3 flex-wrap mb-4 sm:mb-5">
       <Select
         value={filterType}
         onChange={(e) => onTypeChange(e.target.value)}
