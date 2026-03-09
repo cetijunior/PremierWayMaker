@@ -14,7 +14,11 @@ export default function ApplicationRow({ app, onDownloadCv, onDelete, isDemo }) 
         <Badge status={app.paymentStatus} />
       </TableCell>
       <TableCell>
-        {app.bookingDate ? new Date(app.bookingDate).toLocaleDateString() : '—'}
+        {app.bookingStart
+          ? new Date(app.bookingStart).toLocaleString()
+          : app.bookingDate
+          ? new Date(app.bookingDate).toLocaleDateString()
+          : '—'}
       </TableCell>
       <TableCell>{new Date(app.createdAt).toLocaleDateString()}</TableCell>
       <TableCell>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { HiCheck } from 'react-icons/hi2';
@@ -11,10 +11,29 @@ export default function Success() {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('session_id');
+  const location = useLocation();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Non-Stripe flow: data will be provided via navigation state.
+    if (!sessionId && location.state && location.state.fullName) {
+      const { fullName, type } = location.state;
+      const amount = type === 'inside' ? 50 : 200;
+
+      setData({
+        fullName,
+        type,
+        amount,
+        paymentStatus: 'paid',
+        bookingDate: null,
+        bookingStart: null,
+        bookingEnd: null,
+      });
+      setLoading(false);
+      return;
+    }
+
     if (!sessionId) {
       setLoading(false);
       return;
@@ -23,7 +42,7 @@ export default function Success() {
       .then(setData)
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, [sessionId]);
+  }, [sessionId, location.state]);
 
   if (loading) {
     return (
@@ -33,7 +52,7 @@ export default function Success() {
     );
   }
 
-  if (!sessionId || !data) {
+  if (!data) {
     return (
       <div className="min-h-screen flex items-center justify-center pt-16 px-5 bg-cream">
         <div className="text-center">
@@ -104,10 +123,10 @@ export default function Success() {
           <p className="text-sm text-text-light mt-1">
             <strong className="text-navy">{t('success.type')}</strong> {typeName}
           </p>
-          {data.bookingDate && (
+          {(data.bookingDate || data.bookingStart) && (
             <p className="text-sm text-text-light mt-1">
               <strong className="text-navy">{t('success.booking_date')}</strong>{' '}
-              {new Date(data.bookingDate).toLocaleDateString()}
+              {new Date(data.bookingStart || data.bookingDate).toLocaleString()}
             </p>
           )}
         </motion.div>

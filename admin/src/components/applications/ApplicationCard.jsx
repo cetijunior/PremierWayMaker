@@ -8,7 +8,7 @@ export default function ApplicationCard({ app, onDownloadCv, onDelete, isDemo })
         <h3 className="font-semibold text-[#1B2A4A]">{app.fullName}</h3>
         <Badge status={app.paymentStatus} />
       </div>
-      <dl className="grid grid-cols-1 gap-1.5 text-sm text-[#5A6A7A]">
+      <dl className="grid grid-cols-1 gap-1.5 text-sm text-text-light">
         <div>
           <span className="font-medium text-[#1B2A4A]">Email:</span> {app.email}
         </div>
@@ -23,7 +23,11 @@ export default function ApplicationCard({ app, onDownloadCv, onDelete, isDemo })
         </div>
         <div>
           <span className="font-medium text-[#1B2A4A]">Booking:</span>{' '}
-          {app.bookingDate ? new Date(app.bookingDate).toLocaleDateString() : '—'}
+          {app.bookingStart
+            ? new Date(app.bookingStart).toLocaleString()
+            : app.bookingDate
+            ? new Date(app.bookingDate).toLocaleDateString()
+            : '—'}
         </div>
         <div>
           <span className="font-medium text-[#1B2A4A]">Submitted:</span> {new Date(app.createdAt).toLocaleDateString()}

@@ -1,12 +1,39 @@
 const { Application } = require('../models');
-const stripeService = require('../services/stripe.service');
 const storageService = require('../services/storage.service');
 const ApiError = require('../utils/ApiError');
 
 async function submitApplication(req, res, next) {
   try {
-    const { fullName, email, phone, type, bookingDate } = req.body;
-    const amount = stripeService.getAmountInEuros(type);
+    const { fullName, email, phone, type, bookingStart, bookingEnd } = req.body;
+
+    // Temporary: bypass Stripe and derive amount locally.
+    const amount = type === 'inside' ? 50 : 200;
+
+    const parsedStart = new Date(bookingStart);
+    const parsedEnd = new Date(bookingEnd);
+
+    if (Number.isNaN(parsedStart.getTime()) || Number.isNaN(parsedEnd.getTime())) {
+      throw new ApiError(400, 'Invalid booking start or end time');
+    }
+
+    if (parsedStart >= parsedEnd) {
+      throw new ApiError(400, 'Booking end time must be after start time');
+    }
+
+    // Prevent overlapping bookings for non-failed applications.
+    const overlapping = await Application.findOne({
+      paymentStatus: { $in: ['pending', 'paid'] },
+      bookingEnd: { $gt: parsedStart },
+      bookingStart: { $lt: parsedEnd },
+    }).lean();
+
+    if (overlapping) {
+      throw new ApiError(409, 'Selected time slot is no longer available. Please choose another time.');
+    }
+
+    // Derive a legacy date-only field for existing admin views, based on the start time.
+    const bookingDate = new Date(parsedStart);
+    bookingDate.setHours(0, 0, 0, 0);
 
     const cvPath = await storageService.saveCv(req.file.buffer, req.file.originalname);
 
@@ -15,22 +42,17 @@ async function submitApplication(req, res, next) {
       email,
       phone,
       type,
-      bookingDate: new Date(bookingDate),
+      bookingDate,
+      bookingStart: parsedStart,
+      bookingEnd: parsedEnd,
       cvPath,
       amount,
+      // Mark as paid so it appears fully processed in the admin dashboard.
+      paymentStatus: 'paid',
     });
 
-    const session = await stripeService.createCheckoutSession({
-      application,
-      type,
-      fullName,
-      email,
-    });
-
-    application.stripeSessionId = session.id;
-    await application.save();
-
-    res.json({ clientSecret: session.client_secret });
+    // Temporary response while payment is bypassed.
+    res.json({ success: true, applicationId: application._id });
   } catch (err) {
     next(err);
   }
@@ -52,6 +74,8 @@ async function getApplicationStatus(req, res, next) {
       amount: application.amount,
       paymentStatus: application.paymentStatus,
       bookingDate: application.bookingDate,
+      bookingStart: application.bookingStart,
+      bookingEnd: application.bookingEnd,
     });
   } catch (err) {
     next(err);

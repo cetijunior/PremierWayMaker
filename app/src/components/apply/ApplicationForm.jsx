@@ -89,10 +89,31 @@ export default function ApplicationForm({
       </motion.div>
 
       <motion.div custom={4} variants={fieldVariants} initial="hidden" animate="visible">
-        <FileUpload onFileSelect={onFileSelect} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input
+            label={t('form.booking_start')}
+            id="bookingStartTime"
+            name="bookingStartTime"
+            type="time"
+            value={form.bookingStartTime}
+            onChange={onFieldChange}
+          />
+          <Input
+            label={t('form.booking_end')}
+            id="bookingEndTime"
+            name="bookingEndTime"
+            type="time"
+            value={form.bookingEndTime}
+            onChange={onFieldChange}
+          />
+        </div>
       </motion.div>
 
       <motion.div custom={5} variants={fieldVariants} initial="hidden" animate="visible">
+        <FileUpload onFileSelect={onFileSelect} />
+      </motion.div>
+
+      <motion.div custom={6} variants={fieldVariants} initial="hidden" animate="visible">
         <Button type="submit" className="w-full py-3.5 text-base" disabled={loading}>
           {loading ? t('form.processing') : t('form.submit', { price: priceLabel })}
         </Button>

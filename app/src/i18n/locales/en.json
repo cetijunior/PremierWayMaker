@@ -78,6 +78,8 @@
     "phone": "Phone Number",
     "phone_placeholder": "+355 69 123 4567",
     "booking_date": "Appointment Date",
+    "booking_start": "Start Time",
+    "booking_end": "End Time",
     "cv_label": "Upload CV (PDF, DOC, DOCX)",
     "cv_drag": "Drag & Drop your CV here, or",
     "cv_browse": "browse",
