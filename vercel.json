@@ -20,7 +20,7 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "api/index.js" },
     { "handle": "filesystem" },
-    { "src": "/admin(.*)", "dest": "admin/index.html" },
-    { "src": "/(.*)", "dest": "app/index.html" }
+    { "src": "/admin(.*)", "dest": "admin/dist/index.html" },
+    { "src": "/(.*)", "dest": "app/dist/index.html" }
   ]
 }
