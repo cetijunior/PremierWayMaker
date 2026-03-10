@@ -13,8 +13,7 @@ export default function App() {
           <Route element={<AdminLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
-          {/* DEMO: Redirect to dashboard for client preview – restore with: to="/login" */}
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

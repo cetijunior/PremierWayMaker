@@ -6,6 +6,7 @@ const REQUIRED_IN_PRODUCTION = [
   'STRIPE_SECRET_KEY',
   'STRIPE_WEBHOOK_SECRET',
   'CLIENT_URL',
+  'ADMIN_URL',
 ];
 
 function validateEnv() {
@@ -25,7 +26,7 @@ const env = {
   CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:3000',
   ADMIN_URL: process.env.ADMIN_URL || 'http://localhost:3001',
   ADMIN_USERNAME: process.env.ADMIN_USERNAME || 'admin',
-  ADMIN_PASSWORD: process.env.ADMIN_PASSWORD || 'admin123',
+  ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
   NODE_ENV: process.env.NODE_ENV || 'development',
 };
 

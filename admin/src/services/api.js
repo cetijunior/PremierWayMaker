@@ -1,4 +1,10 @@
-const BASE_URL = '/api/admin';
+function joinUrl(origin, path) {
+  if (!origin) return path; // same-origin (monorepo / rewrites) or dev proxy
+  return `${origin.replace(/\/+$/, '')}${path}`;
+}
+
+const API_ORIGIN = import.meta.env.VITE_API_ORIGIN || '';
+const BASE_URL = joinUrl(API_ORIGIN, '/api/admin');
 
 function getToken() {
   return localStorage.getItem('token');

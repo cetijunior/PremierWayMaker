@@ -15,8 +15,7 @@ export function AuthProvider({ children }) {
     setToken(null);
   }, []);
 
-  // DEMO: Bypass auth for client preview – restore with: const isAuthenticated = !!token;
-  const isAuthenticated = true; // !!token;
+  const isAuthenticated = !!token;
 
   return (
     <AuthContext.Provider value={{ token, isAuthenticated, saveToken, logout }}>
