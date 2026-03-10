@@ -1,6 +1,7 @@
 const { Application } = require('../models');
 const storageService = require('../services/storage.service');
 const ApiError = require('../utils/ApiError');
+const { isWithinBusinessHours } = require('../utils/businessHours');
 
 async function submitApplication(req, res, next) {
   try {
@@ -19,6 +20,15 @@ async function submitApplication(req, res, next) {
     if (parsedStart >= parsedEnd) {
       throw new ApiError(400, 'Booking end time must be after start time');
     }
+
+  const businessHoursCheck = isWithinBusinessHours(parsedStart, parsedEnd);
+  if (!businessHoursCheck.ok) {
+    throw new ApiError(
+      400,
+      businessHoursCheck.reason ||
+        'Bookings are only available Monday–Friday between 08:00 and 18:00 (Tirana local time).'
+    );
+  }
 
     // Prevent overlapping bookings for non-failed applications.
     const overlapping = await Application.findOne({

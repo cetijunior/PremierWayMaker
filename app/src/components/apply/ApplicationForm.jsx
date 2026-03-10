@@ -97,6 +97,8 @@ export default function ApplicationForm({
             type="time"
             value={form.bookingStartTime}
             onChange={onFieldChange}
+            min="08:00"
+            max="18:00"
           />
           <Input
             label={t('form.booking_end')}
@@ -105,8 +107,13 @@ export default function ApplicationForm({
             type="time"
             value={form.bookingEndTime}
             onChange={onFieldChange}
+            min="08:00"
+            max="18:00"
           />
         </div>
+        <p className="text-xs text-text-light mt-2">
+          Bookings are available Monday–Friday between 08:00 and 18:00 (Tirana local time).
+        </p>
       </motion.div>
 
       <motion.div custom={5} variants={fieldVariants} initial="hidden" animate="visible">

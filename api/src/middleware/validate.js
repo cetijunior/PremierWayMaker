@@ -1,4 +1,5 @@
 const ApiError = require('../utils/ApiError');
+const { isWithinBusinessHours } = require('../utils/businessHours');
 
 function validateApplyBody(req, _res, next) {
   const { fullName, email, phone, type, bookingStart, bookingEnd } = req.body;
@@ -19,6 +20,17 @@ function validateApplyBody(req, _res, next) {
 
   if (parsedStart >= parsedEnd) {
     return next(new ApiError(400, 'Booking end time must be after start time'));
+  }
+
+  const businessHoursCheck = isWithinBusinessHours(parsedStart, parsedEnd);
+  if (!businessHoursCheck.ok) {
+    return next(
+      new ApiError(
+        400,
+        businessHoursCheck.reason ||
+          'Bookings are only available Monday–Friday between 08:00 and 18:00 (Tirana local time).'
+      )
+    );
   }
 
   const today = new Date();
