@@ -27,8 +27,15 @@ export default function ServiceGrid() {
   const { t } = useTranslation();
 
   return (
-    <section id="services" className="py-20 px-5 bg-cream">
-      <div className="max-w-6xl mx-auto">
+    <section id="services" className="relative py-20 px-5 bg-cream overflow-hidden">
+      {/* Soft floating shapes background, inspired by hero */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-24 -right-10 w-56 h-56 rounded-full bg-blue/5 animate-float" />
+        <div className="absolute top-1/3 -left-20 w-40 h-40 rounded-full bg-gold/5 animate-spin-slow" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-72 h-72 border border-navy/5 rounded-full animate-spin-slow" />
+      </div>
+
+      <div className="relative max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

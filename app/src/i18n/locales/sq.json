@@ -37,13 +37,13 @@
       "label": "Brenda Shqipërisë",
       "subtitle": "Punë & Rezidencë",
       "desc": "Mbështetje e plotë për vendosjen në punë, dokumentacionin dhe rezidencën.",
-      "price": "€50"
+      "price": "5,000 ALL"
     },
     "outside": {
       "label": "Jashtë Shqipërisë",
       "subtitle": "Viza & Leje Pune",
       "desc": "Udhëzim ekspert për leje pune dhe aplikime vizash në BE, SHBA dhe më gjerë.",
-      "price": "€200"
+      "price": "30,000 ALL"
     },
     "cta": "Apliko Tani — {{price}}"
   },
@@ -71,6 +71,12 @@
     "back": "Kthehu në Kryefaqe"
   },
   "form": {
+    "step1_label": "Hapi 1",
+    "step1_title": "Të dhënat tuaja",
+    "step2_label": "Hapi 2",
+    "step2_title": "Zgjidhni takimin",
+    "step3_label": "Hapi 3",
+    "step3_title": "Ngarko CV & konfirmo",
     "full_name": "Emri i Plotë",
     "full_name_placeholder": "Emri juaj i plotë",
     "email": "Email",
@@ -78,9 +84,17 @@
     "phone": "Numri i Telefonit",
     "phone_placeholder": "+355 69 123 4567",
     "booking_date": "Data e Takimit",
+    "booking_slot_placeholder": "Zgjidhni orarin (Hënë–Premte, 1 orë)",
+    "booking_slot_hint": "Takimet janë të disponueshme nga e hëna në të premte, midis orës 08:00 dhe 18:00 (ora lokale e Tiranës). Çdo takim zgjat 60 minuta.",
     "cv_label": "Ngarko CV (PDF, DOC, DOCX)",
     "cv_drag": "Tërhiq & Lësho CV-në tuaj këtu, ose",
     "cv_browse": "shfleto",
+    "error_fill_all_fields": "Ju lutemi plotësoni të gjitha fushat.",
+    "error_upload_cv": "Ju lutemi ngarkoni CV-në tuaj (PDF, DOC ose DOCX).",
+    "error_invalid_booking_date": "Data e takimit është e pavlefshme. Ju lutemi kontrolloni datën e zgjedhur.",
+    "error_weekday_only": "Takimet janë të disponueshme vetëm nga e hëna në të premte midis orës 08:00 dhe 18:00 (ora lokale e Tiranës).",
+    "error_invalid_booking_time": "Ora e takimit është e pavlefshme. Ju lutemi kontrolloni orarin e zgjedhur.",
+    "error_end_after_start": "Ora e përfundimit duhet të jetë pas orës së fillimit.",
     "submit": "Paguaj {{price}} & Dërgo",
     "processing": "Duke procesuar..."
   },

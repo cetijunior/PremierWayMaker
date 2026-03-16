@@ -33,6 +33,6 @@ export const APPLICATION_TYPES = {
     label: 'Outside Albania',
     subtitle: 'Work Visas & Permits',
     desc: 'Expert guidance for work permits and visa applications in the EU, USA, and beyond.',
-    price: '€200',
+    price: '€300 (approx 30,000 ALL)',
   },
 };

@@ -29,8 +29,15 @@ export default function ContactSection() {
   const { t } = useTranslation();
 
   return (
-    <section id="contact" className="py-20 px-5 bg-cream">
-      <div className="max-w-5xl mx-auto">
+    <section id="contact" className="relative py-20 px-5 bg-cream overflow-hidden">
+      {/* Subtle animated circles to continue visual language */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-blue/5 animate-float" />
+        <div className="absolute bottom-10 right-0 w-52 h-52 rounded-full bg-gold/5 animate-spin-slow" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-72 h-72 border border-navy/5 rounded-full animate-spin-slow" />
+      </div>
+
+      <div className="relative max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { submitApplication } from '../services/api';
 
 export function useApplicationForm(type) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [form, setForm] = useState({
     fullName: '',
     email: '',
@@ -26,9 +28,7 @@ export function useApplicationForm(type) {
         const dayOfWeek = bookingDateObj.getDay(); // 0 = Sunday, 6 = Saturday
 
         if (dayOfWeek === 0 || dayOfWeek === 6) {
-          setError(
-            'Bookings are only available Monday–Friday between 08:00 and 18:00 (Tirana local time).'
-          );
+          setError(t('form.error_weekday_only'));
           setForm((prev) => ({ ...prev, bookingDate: '' }));
           return;
         }
@@ -54,24 +54,22 @@ export function useApplicationForm(type) {
       !form.bookingStartTime ||
       !form.bookingEndTime
     ) {
-      return setError('Please fill in all fields.');
+      return setError(t('form.error_fill_all_fields'));
     }
     if (!cv) {
-      return setError('Please upload your CV (PDF, DOC, or DOCX).');
+      return setError(t('form.error_upload_cv'));
     }
 
     // Basic weekday and business-hours checks in browser local time
     const bookingDateObj = new Date(`${form.bookingDate}T00:00`);
 
     if (Number.isNaN(bookingDateObj.getTime())) {
-      return setError('Invalid booking date. Please check your selected date.');
+      return setError(t('form.error_invalid_booking_date'));
     }
 
     const dayOfWeek = bookingDateObj.getDay(); // 0 = Sunday, 6 = Saturday
     if (dayOfWeek === 0 || dayOfWeek === 6) {
-      return setError(
-        'Bookings are only available Monday–Friday between 08:00 and 18:00 (Tirana local time).'
-      );
+      return setError(t('form.error_weekday_only'));
     }
 
     const [startHourStr, startMinuteStr] = form.bookingStartTime.split(':');
@@ -88,7 +86,7 @@ export function useApplicationForm(type) {
       Number.isNaN(endHour) ||
       Number.isNaN(endMinute)
     ) {
-      return setError('Invalid booking time. Please check your selected time.');
+      return setError(t('form.error_invalid_booking_time'));
     }
 
     const startTotalMinutes = startHour * 60 + startMinute;
@@ -102,13 +100,11 @@ export function useApplicationForm(type) {
       endTotalMinutes <= openMinutes ||
       endTotalMinutes > closeMinutes
     ) {
-      return setError(
-        'Bookings are only available Monday–Friday between 08:00 and 18:00 (Tirana local time).'
-      );
+      return setError(t('form.error_weekday_only'));
     }
 
     if (endTotalMinutes <= startTotalMinutes) {
-      return setError('End time must be after start time.');
+      return setError(t('form.error_end_after_start'));
     }
 
     // Build start/end ISO strings from date + time inputs.
@@ -116,11 +112,11 @@ export function useApplicationForm(type) {
     const endIso = new Date(`${form.bookingDate}T${form.bookingEndTime}`).toISOString();
 
     if (Number.isNaN(new Date(startIso).getTime()) || Number.isNaN(new Date(endIso).getTime())) {
-      return setError('Invalid booking time. Please check your selected time.');
+      return setError(t('form.error_invalid_booking_time'));
     }
 
     if (new Date(startIso) >= new Date(endIso)) {
-      return setError('End time must be after start time.');
+      return setError(t('form.error_end_after_start'));
     }
 
     setLoading(true);

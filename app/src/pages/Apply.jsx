@@ -45,8 +45,15 @@ export default function Apply() {
   }
 
   return (
-    <div className="min-h-screen bg-cream pt-24 pb-16 px-5">
-      <div className="max-w-lg mx-auto">
+    <div className="relative min-h-screen bg-cream pt-24 pb-16 px-5 overflow-hidden">
+      {/* Soft background shapes to match hero aesthetic */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-24 right-0 w-72 h-72 rounded-full bg-blue/5 animate-float" />
+        <div className="absolute bottom-0 -left-20 w-64 h-64 rounded-full bg-gold/5 animate-spin-slow" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-80 h-80 border border-navy/5 rounded-full animate-spin-slow" />
+      </div>
+
+      <div className="relative max-w-lg mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

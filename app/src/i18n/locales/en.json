@@ -43,7 +43,7 @@
       "label": "Outside Albania",
       "subtitle": "Work Visas & Permits",
       "desc": "Expert guidance for work permits and visa applications in the EU, USA, and beyond.",
-      "price": "€200"
+      "price": "€300"
     },
     "cta": "Apply Now — {{price}}"
   },
@@ -71,6 +71,12 @@
     "back": "Back to Home"
   },
   "form": {
+    "step1_label": "Step 1",
+    "step1_title": "Your details",
+    "step2_label": "Step 2",
+    "step2_title": "Choose appointment",
+    "step3_label": "Step 3",
+    "step3_title": "Upload CV & confirm",
     "full_name": "Full Name",
     "full_name_placeholder": "Your full name",
     "email": "Email",
@@ -78,11 +84,19 @@
     "phone": "Phone Number",
     "phone_placeholder": "+355 69 123 4567",
     "booking_date": "Appointment Date",
+    "booking_slot_placeholder": "Select a time (Mon–Fri, 1‑hour slot)",
+    "booking_slot_hint": "Bookings are available Monday–Friday between 08:00 and 18:00 (Tirana local time). Each appointment is a 60‑minute slot.",
     "booking_start": "Start Time",
     "booking_end": "End Time",
     "cv_label": "Upload CV (PDF, DOC, DOCX)",
     "cv_drag": "Drag & Drop your CV here, or",
     "cv_browse": "browse",
+    "error_fill_all_fields": "Please fill in all fields.",
+    "error_upload_cv": "Please upload your CV (PDF, DOC, or DOCX).",
+    "error_invalid_booking_date": "Invalid booking date. Please check your selected date.",
+    "error_weekday_only": "Bookings are only available Monday–Friday between 08:00 and 18:00 (Tirana local time).",
+    "error_invalid_booking_time": "Invalid booking time. Please check your selected time.",
+    "error_end_after_start": "End time must be after start time.",
     "submit": "Pay {{price}} & Submit",
     "processing": "Processing..."
   },

@@ -43,7 +43,7 @@
       "label": "Sa Labas ng Albania",
       "subtitle": "Mga Work Visa at Permit",
       "desc": "Dalubhasang gabay para sa mga work permit at aplikasyon ng visa sa EU, USA, at iba pa.",
-      "price": "€200"
+      "price": "€300"
     },
     "cta": "Mag-apply Ngayon — {{price}}"
   },
@@ -71,6 +71,12 @@
     "back": "Bumalik sa Home"
   },
   "form": {
+    "step1_label": "Hakbang 1",
+    "step1_title": "Iyong detalye",
+    "step2_label": "Hakbang 2",
+    "step2_title": "Pumili ng appointment",
+    "step3_label": "Hakbang 3",
+    "step3_title": "I-upload ang CV at kumpirmahin",
     "full_name": "Buong Pangalan",
     "full_name_placeholder": "Ang iyong buong pangalan",
     "email": "Email",
@@ -78,9 +84,17 @@
     "phone": "Numero ng Telepono",
     "phone_placeholder": "+355 69 123 4567",
     "booking_date": "Petsa ng Appointment",
+    "booking_slot_placeholder": "Pumili ng oras (Lun–Biy, 1-oras na slot)",
+    "booking_slot_hint": "Available ang mga appointment mula Lunes hanggang Biyernes sa pagitan ng 08:00 at 18:00 (oras ng Tirana). Bawat appointment ay 60 minuto.",
     "cv_label": "I-upload ang CV (PDF, DOC, DOCX)",
     "cv_drag": "I-drag at I-drop ang iyong CV dito, o",
     "cv_browse": "mag-browse",
+    "error_fill_all_fields": "Mangyaring punan ang lahat ng mga field.",
+    "error_upload_cv": "Mangyaring i-upload ang iyong CV (PDF, DOC, o DOCX).",
+    "error_invalid_booking_date": "Hindi wasto ang petsa ng appointment. Pakisuri ang napiling petsa.",
+    "error_weekday_only": "Available lamang ang mga appointment mula Lunes hanggang Biyernes sa pagitan ng 08:00 at 18:00 (oras ng Tirana).",
+    "error_invalid_booking_time": "Hindi wasto ang oras ng appointment. Pakisuri ang napiling oras.",
+    "error_end_after_start": "Dapat mas huli ang oras ng pagtatapos kaysa sa oras ng pagsisimula.",
     "submit": "Magbayad {{price}} at Isumite",
     "processing": "Pinoproseso..."
   },

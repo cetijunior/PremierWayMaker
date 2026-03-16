@@ -12,8 +12,15 @@ export default function ApplySection() {
   const { t } = useTranslation();
 
   return (
-    <section id="apply" className="py-20 px-5 bg-cream-dark">
-      <div className="max-w-4xl mx-auto">
+    <section id="apply" className="relative py-20 px-5 bg-cream-dark overflow-hidden">
+      {/* Decorative background echoes hero styling */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-16 left-1/4 w-48 h-48 rounded-full bg-gold/5 animate-float" />
+        <div className="absolute bottom-0 -right-24 w-64 h-64 rounded-full bg-navy/5 animate-spin-slow" />
+        <div className="absolute top-1/2 right-1/3 w-40 h-40 border border-white/5 rounded-full animate-spin-slow" />
+      </div>
+
+      <div className="relative max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
