@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaInstagram, FaWhatsapp, FaFacebookF } from 'react-icons/fa';
 import { HiEnvelope, HiMapPin, HiPhone } from 'react-icons/hi2';
 import { CONTACT } from '../../constants/brand';
 
@@ -12,6 +12,12 @@ const ACTIONS = [
     hoverClass: 'hover:bg-gradient-to-br hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#F77737] hover:text-white hover:border-transparent',
   },
   {
+    key: 'facebook',
+    Icon: FaFacebookF,
+    href: CONTACT.socials.facebook,
+    hoverClass: 'hover:bg-[#1877F2] hover:text-white hover:border-transparent',
+  },
+  {
     key: 'whatsapp',
     Icon: FaWhatsapp,
     href: CONTACT.socials.whatsapp,
@@ -20,7 +26,7 @@ const ACTIONS = [
   {
     key: 'email',
     Icon: HiEnvelope,
-    href: 'mailto:info@premierwaymaker.com',
+    href: `mailto:${CONTACT.email}`,
     hoverClass: 'hover:bg-blue hover:text-white hover:border-transparent',
   },
 ];
@@ -81,29 +87,40 @@ export default function ContactSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto"
         >
-          <div className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-gray-100">
-            <div className="w-10 h-10 rounded-xl bg-navy/5 flex items-center justify-center shrink-0">
+          <a href={CONTACT.address.mapLink} target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-gray-100 hover:border-navy/20 transition-all group block">
+            <div className="w-10 h-10 rounded-xl bg-navy/5 flex items-center justify-center shrink-0 group-hover:bg-navy/10 transition-colors">
               <HiMapPin className="w-5 h-5 text-navy" />
             </div>
             <div>
-              <h4 className="text-navy font-semibold mb-1">{t('contact.address_label')}</h4>
+              <h4 className="text-navy font-semibold mb-1 group-hover:text-gold transition-colors">{t('contact.address_label')}</h4>
               <p className="text-text-light text-sm leading-relaxed">
                 {CONTACT.address.line1}<br />
-                {CONTACT.address.line2}<br />
-                {CONTACT.address.line3}
+                {CONTACT.address.line2}
               </p>
             </div>
-          </div>
+          </a>
 
           <div className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-gray-100">
             <div className="w-10 h-10 rounded-xl bg-navy/5 flex items-center justify-center shrink-0">
               <HiPhone className="w-5 h-5 text-navy" />
             </div>
-            <div>
-              <h4 className="text-navy font-semibold mb-1">{t('contact.phone_label')}</h4>
-              {CONTACT.phones.map((phone) => (
-                <p key={phone} className="text-text-light text-sm">{phone}</p>
-              ))}
+            <div className="w-full">
+              <h4 className="text-navy font-semibold mb-2">{t('contact.phone_label')}</h4>
+              <div className="flex flex-col gap-3">
+                {CONTACT.phones.map((phone) => (
+                  <div key={phone} className="flex items-center justify-between group">
+                    <span className="text-text-light text-sm font-medium">{phone}</span>
+                    <div className="flex gap-2.5">
+                      <a href={`tel:${phone.replace(/\s+/g, '')}`} className="w-8 h-8 rounded-lg bg-navy/5 flex items-center justify-center text-navy/60 hover:bg-gold hover:text-navy transition-all" title={t('contact.call_us')}>
+                        <HiPhone className="w-4 h-4" />
+                      </a>
+                      <a href={CONTACT.socials.whatsapp} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-lg bg-[#25D366]/10 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all" title={t('contact.whatsapp')}>
+                        <FaWhatsapp className="w-4 h-4" />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>

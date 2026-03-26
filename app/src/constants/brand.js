@@ -6,15 +6,15 @@ export const BRAND = {
 
 export const CONTACT = {
   address: {
-    line1: 'Yoaz Premier Way Maker',
-    line2: 'Agency, 19 Buri avari Berrania,',
-    line3: 'Blainarti Ivat 6, Albania',
-    line4: 'Albania Ilt: 50324',
+    line1: 'Rruga Egnatia',
+    line2: 'Durrës, Albania',
+    mapLink: 'https://maps.app.goo.gl/qpF1CiWGpmewaVt48?g_st=ic',
   },
-  phones: ['+[872] 335 3500', '+[812] 372 1333'],
+  phones: ['+355 69 373 2177'],
+  email: 'premierwaymaker@gmail.com',
   socials: {
-    instagram: 'https://instagram.com/',
-    facebook: 'https://facebook.com/',
-    whatsapp: 'https://wa.me/',
+    instagram: 'https://www.instagram.com/p_way_maker/',
+    facebook: 'https://www.facebook.com/profile.php?id=100090596897851',
+    whatsapp: 'https://wa.me/355693732177',
   },
 };

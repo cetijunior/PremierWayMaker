@@ -51,10 +51,14 @@
     "heading": "Makipag-ugnayan",
     "subtitle": "Makipag-ugnayan sa amin anumang oras — nandito kami para tumulong.",
     "instagram": "Instagram",
+    "facebook": "Facebook",
     "whatsapp": "WhatsApp",
     "email": "Email",
     "address_label": "Address",
-    "phone_label": "Telepono"
+    "phone_label": "Telepono",
+    "call_us": "Tawagan Kami",
+    "message_us": "Mensahe",
+    "get_directions": "Direksyon"
   },
   "footer": {
     "tagline": "Ang iyong dalubhasang gabay sa mga aplikasyon ng trabaho at visa sa Albania at sa ibang bansa.",

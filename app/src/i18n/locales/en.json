@@ -51,10 +51,14 @@
     "heading": "Contact Us",
     "subtitle": "Reach out to us anytime — we're here to help.",
     "instagram": "Instagram",
+    "facebook": "Facebook",
     "whatsapp": "WhatsApp",
     "email": "Email",
     "address_label": "Address",
-    "phone_label": "Phone"
+    "phone_label": "Phone",
+    "call_us": "Call Us",
+    "message_us": "Message Us",
+    "get_directions": "Get Directions"
   },
   "footer": {
     "tagline": "Your Expert Guide to Job & Visa Applications in Albania and Abroad.",

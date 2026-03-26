@@ -8,7 +8,7 @@ async function submitApplication(req, res, next) {
     const { fullName, email, phone, type, bookingStart, bookingEnd } = req.body;
 
     // Temporary: bypass Stripe and derive amount locally.
-    const amount = type === 'inside' ? 50 : 200;
+    const amount = type === 'inside' ? 50 : 300;
 
     const parsedStart = new Date(bookingStart);
     const parsedEnd = new Date(bookingEnd);

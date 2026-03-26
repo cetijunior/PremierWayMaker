@@ -51,10 +51,14 @@
     "heading": "Na Kontaktoni",
     "subtitle": "Na kontaktoni në çdo kohë — jemi këtu për t'ju ndihmuar.",
     "instagram": "Instagram",
+    "facebook": "Facebook",
     "whatsapp": "WhatsApp",
     "email": "Email",
     "address_label": "Adresa",
-    "phone_label": "Telefoni"
+    "phone_label": "Telefoni",
+    "call_us": "Na Telefononi",
+    "message_us": "Mesazh",
+    "get_directions": "Udhëzime"
   },
   "footer": {
     "tagline": "Udhëzuesi juaj ekspert për aplikime pune dhe viza në Shqipëri dhe jashtë.",

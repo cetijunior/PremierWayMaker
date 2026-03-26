@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaInstagram, FaFacebookF, FaWhatsapp } from 'react-icons/fa';
+import { HiMapPin, HiPhone, HiEnvelope } from 'react-icons/hi2';
 import { BRAND, CONTACT } from '../../constants/brand';
 
 export default function Footer() {
@@ -53,15 +54,51 @@ export default function Footer() {
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
               {t('footer.contact_info')}
             </h4>
-            <p className="text-sm leading-relaxed text-white/60 mb-3">
-              {CONTACT.address.line1}<br />
-              {CONTACT.address.line2}<br />
-              {CONTACT.address.line3}<br />
-              {CONTACT.address.line4}
-            </p>
-            {CONTACT.phones.map((phone) => (
-              <p key={phone} className="text-sm text-white/60">{phone}</p>
-            ))}
+            <ul className="space-y-4">
+              <li>
+                 <a href={CONTACT.address.mapLink} target="_blank" rel="noopener noreferrer" title={t('contact.get_directions')} className="flex items-start gap-3 group">
+                   <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-gold/20 transition-colors">
+                     <HiMapPin className="w-4 h-4 text-white/60 group-hover:text-gold transition-colors" />
+                   </div>
+                   <div className="text-sm leading-relaxed text-white/60 group-hover:text-gold transition-colors pt-1">
+                     {CONTACT.address.line1}<br />
+                     {CONTACT.address.line2}
+                   </div>
+                 </a>
+              </li>
+              <li>
+                 <div className="flex items-start gap-3 group">
+                   <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
+                     <HiPhone className="w-4 h-4 text-white/60" />
+                   </div>
+                   <div className="flex flex-col gap-2 w-full pt-1.5">
+                     {CONTACT.phones.map((phone) => (
+                       <div key={phone} className="flex items-center justify-between text-sm text-white/60">
+                         <span>{phone}</span>
+                         <div className="flex gap-2.5">
+                           <a href={`tel:${phone.replace(/\s+/g, '')}`} className="text-white/40 hover:text-gold transition-colors" title={t('contact.call_us')}>
+                             <HiPhone className="w-4.5 h-4.5" />
+                           </a>
+                           <a href={CONTACT.socials.whatsapp} target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-[#25D366] transition-colors" title={t('contact.whatsapp')}>
+                             <FaWhatsapp className="w-4.5 h-4.5" />
+                           </a>
+                         </div>
+                       </div>
+                     ))}
+                   </div>
+                 </div>
+              </li>
+              <li>
+                 <a href={`mailto:${CONTACT.email}`} title={t('contact.message_us')} className="flex items-center gap-3 group">
+                   <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-gold/20 transition-colors">
+                     <HiEnvelope className="w-4 h-4 text-white/60 group-hover:text-gold transition-colors" />
+                   </div>
+                   <span className="text-sm text-white/60 group-hover:text-gold transition-colors">
+                     {CONTACT.email}
+                   </span>
+                 </a>
+              </li>
+            </ul>
           </div>
 
           {/* Social */}

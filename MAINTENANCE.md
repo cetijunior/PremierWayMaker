@@ -24,8 +24,8 @@ How to make changes safely without breaking the application.
 ## Changing Application Types or Prices
 
 Prices are centralized in `api/src/constants/pricing.js`:
-- `PRICES_CENTS`: { inside: 5000, outside: 20000 }
-- `PRICES_EUROS`: { inside: 50, outside: 200 }
+- `PRICES_CENTS`: { inside: 5000, outside: 30000 }
+- `PRICES_EUROS`: { inside: 50, outside: 300 }
 
 To add or change a type:
 1. Update `api/src/constants/pricing.js`.

@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiBars3, HiXMark } from 'react-icons/hi2';
-import { BRAND } from '../../constants/brand';
+import { HiBars3, HiXMark, HiPhone } from 'react-icons/hi2';
+import { FaWhatsapp } from 'react-icons/fa';
+import { BRAND, CONTACT } from '../../constants/brand';
 import LanguageSwitcher from '../ui/LanguageSwitcher';
 
 export default function Navbar() {
@@ -133,6 +134,29 @@ export default function Navbar() {
                 >
                   {t('nav.contact')}
                 </button>
+              </div>
+
+              {/* Quick Contact Bottom Section */}
+              <div className="mt-auto p-5 border-t border-white/10 bg-white/5">
+                <p className="text-xs text-white/40 uppercase tracking-wider mb-3 font-medium">Quick Contact</p>
+                <div className="grid grid-cols-2 gap-3">
+                  <a
+                    href={CONTACT.socials.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white py-3 rounded-xl transition-all font-medium text-sm border border-[#25D366]/20 hover:border-transparent"
+                  >
+                    <FaWhatsapp className="w-4 h-4" />
+                    {t('contact.whatsapp')}
+                  </a>
+                  <a
+                    href={`tel:${CONTACT.phones[0].replace(/\s+/g, '')}`}
+                    className="flex items-center justify-center gap-2 bg-white/5 text-white hover:bg-gold hover:text-navy py-3 rounded-xl transition-all font-medium text-sm border border-white/10 hover:border-transparent"
+                  >
+                    <HiPhone className="w-4 h-4" />
+                    {t('contact.call_us')}
+                  </a>
+                </div>
               </div>
             </motion.div>
           </>
