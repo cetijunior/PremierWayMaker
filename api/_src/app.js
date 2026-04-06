@@ -49,6 +49,15 @@ function createApp() {
         if (!origin) return cb(null, true); // server-to-server / same-origin
         const normalized = origin.replace(/\/+$/, '');
         if (allowedOrigins.has(normalized)) return cb(null, true);
+
+        // Allow dynamically generated Vercel URLs for this specific project
+        if (
+          normalized.includes('premier-way-maker') &&
+          normalized.endsWith('.vercel.app')
+        ) {
+          return cb(null, true);
+        }
+
         return cb(new ApiError(403, `CORS blocked for origin: ${origin}`));
       },
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
