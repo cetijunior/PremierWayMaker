@@ -1,5 +1,5 @@
-const connectDB = require('./src/config/db');
-const createApp = require('./src/app');
+const connectDB = require('./_src/config/db');
+const createApp = require('./_src/app');
 
 let app;
 
