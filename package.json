@@ -5,6 +5,7 @@
   "description": "Job and visa application platform for Albania. Public-facing app for applicants, admin dashboard for managing applications, and API backend with Stripe payments.",
   "main": "index.js",
   "scripts": {
+    "build": "npm run build --prefix app && npm run build --prefix admin",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
