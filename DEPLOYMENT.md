@@ -85,8 +85,17 @@ PayPal sandbox, and Gmail email.
 
 ### 4b. Set Environment Variables
 
-In Vercel → Project → **Settings** → **Environment Variables**,
-add ALL of the following for **Production** (and Preview if desired):
+In Vercel -> Project -> **Settings** -> **General**,
+configure these **Build & Development Settings**:
+
+| Setting | Value |
+|---|---|
+| **Build Command** | `npm run build` |
+| **Output Directory** | `.` (Select "Override" and type a dot) |
+| **Install Command** | `npm install` |
+
+And in **Settings** -> **Environment Variables**,
+add ALL of the following for **Production**:
 
 | Variable | Value |
 |---|---|
@@ -98,54 +107,46 @@ add ALL of the following for **Production** (and Preview if desired):
 | `PAYPAL_WEBHOOK_ID` | From PayPal webhook settings |
 | `GMAIL_USER` | `premierwaymaker@gmail.com` |
 | `GMAIL_APP_PASSWORD` | The 16-char App Password |
-| `CLIENT_URL` | `https://your-vercel-domain.vercel.app` |
-| `ADMIN_URL` | `https://your-vercel-domain.vercel.app/admin` |
+| `CLIENT_URL` | `https://your-domain.vercel.app` |
+| `ADMIN_URL` | `https://your-domain.vercel.app/admin` |
 | `ADMIN_USERNAME` | `admin` |
 | `ADMIN_PASSWORD` | Strong password for dashboard login |
 | `BLOB_READ_WRITE_TOKEN` | From Vercel Blob store |
 | `VITE_PAYPAL_CLIENT_ID` | Same as `PAYPAL_CLIENT_ID` |
 | `NODE_ENV` | `production` |
 
-> **Important:** `VITE_*` variables are baked into the frontend at build time.
-> After adding or changing them you must redeploy.
-
 ### 4c. Deploy
 
 ```bash
-# Install Vercel CLI if you haven't
-npm i -g vercel
-
-# From the repo root
-vercel --prod
+# If you don't have Vercel CLI installed globally:
+npx vercel login
+npx vercel --prod
 ```
 
 Or connect the repo in the Vercel dashboard and it will auto-deploy on push.
-
-The root `vercel.json` already handles routing for all three packages
-(app, admin, api).
+The root `vercel.json` already handles routing for all three packages (`app`, `admin`, `api`) via modern **Rewrites**.
 
 ---
 
 ## 5. Post-Deploy Checklist
 
 - [ ] Visit `https://your-domain.vercel.app/api/health` → should return `{"status":"ok","db":"connected"}`
-- [ ] Seed the admin: `MONGODB_URI="..." ADMIN_PASSWORD="..." node api/src/seed.js`
+- [ ] Seed the admin (using node locally): `MONGODB_URI="..." ADMIN_PASSWORD="..." node api/src/seed.js`
 - [ ] Log in to admin dashboard at `/admin`
 - [ ] Submit a test application with a PayPal sandbox buyer account
-- [ ] Verify you receive the admin notification email at `premierwaymaker@gmail.com`
-- [ ] Verify the applicant receives a confirmation email
+- [ ] Verify you receive the admin notification email
+- [ ] Verify the applicant receives confirmation email
 - [ ] Check the application appears as **paid** in the admin dashboard
-- [ ] Test CV download from the admin dashboard
 
 ---
 
 ## 6. Custom Domain (Optional)
 
-1. In Vercel → Project → **Domains** → Add your domain.
+1. In Vercel -> Project -> **Domains** -> Add your domain.
 2. Update DNS records at your registrar as instructed by Vercel.
 3. Update `CLIENT_URL` and `ADMIN_URL` env vars to use the custom domain.
 4. Update the PayPal webhook URL to use the custom domain.
-5. Redeploy.
+5. Redeploy (`npx vercel --prod`).
 
 ---
 
