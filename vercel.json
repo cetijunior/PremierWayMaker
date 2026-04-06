@@ -1,11 +1,22 @@
 {
   "version": 2,
   "functions": {
-    "api/index.js": { "includeFiles": "api/src/**", "runtime": "nodejs18.x" }
+    "api/index.js": {
+      "includeFiles": "api/src/**"
+    }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index.js" },
-    { "source": "/admin(.*)", "destination": "/admin/dist/index.html" },
-    { "source": "/(.*)", "destination": "/app/dist/index.html" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/admin(.*)",
+      "destination": "/admin/dist/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/app/dist/index.html"
+    }
   ]
 }
