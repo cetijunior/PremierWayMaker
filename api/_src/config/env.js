@@ -1,25 +1,18 @@
 // api/src/config/env.js
 'use strict';
 
-const fs   = require('fs');
-const path = require('path');
-
-// Only load .env file if it exists and we're not in production (already in process.env)
-const envPath = path.resolve(__dirname, '../../../.env');
-if (fs.existsSync(envPath) && process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({ path: envPath });
-} else {
-  // Try to load any root .env as fallback if it exists
-  require('dotenv').config();
+// Load .env file for local development only.
+// On Vercel, environment variables are injected directly into process.env.
+try {
+  const path = require('path');
+  require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
+} catch {
+  // dotenv not available or .env not found — fine in production
 }
 
 const REQUIRED_IN_PRODUCTION = [
   'MONGODB_URI',
   'JWT_SECRET',
-  'PAYPAL_CLIENT_ID',
-  'PAYPAL_CLIENT_SECRET',
-  'GMAIL_USER',
-  'GMAIL_APP_PASSWORD',
   'CLIENT_URL',
   'ADMIN_URL',
 ];
@@ -58,7 +51,7 @@ const env = {
 };
 
 if (!env.MONGODB_URI?.trim()) {
-  throw new Error('MONGODB_URI is required. Add it to your .env file.');
+  throw new Error('MONGODB_URI is required.');
 }
 
 validateEnv();
