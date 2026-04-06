@@ -3,5 +3,3 @@
 # api/index.js will still be able to require these files.
 api/src/**
 api/node_modules/**
-admin/**
-app/**
