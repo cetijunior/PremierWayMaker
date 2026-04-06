@@ -1,15 +1,15 @@
 const COLORS = {
-  paid: 'bg-green-100 text-green-800',
-  pending: 'bg-yellow-100 text-yellow-800',
-  failed: 'bg-red-100 text-red-800',
+  paid: 'bg-emerald-100 text-emerald-800 ring-emerald-600/20',
+  pending: 'bg-amber-100 text-amber-800 ring-amber-600/20',
+  failed: 'bg-rose-100 text-rose-800 ring-rose-600/20',
 };
 
 export default function Badge({ status }) {
   return (
     <span
-      className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold ${COLORS[status] || 'bg-gray-100 text-gray-800'}`}
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ring-1 ring-inset ${COLORS[status] || 'bg-slate-100 text-slate-800 ring-slate-500/20'}`}
     >
-      {status}
+      {status ? status.charAt(0).toUpperCase() + status.slice(1) : ''}
     </span>
   );
 }

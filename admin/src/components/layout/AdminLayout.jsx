@@ -13,22 +13,22 @@ export default function AdminLayout() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F4F1EC]">
-      <Header onMenuClick={() => setSidebarOpen((o) => !o)} />
-      <div className="flex flex-1 min-h-0 relative">
-        <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        <main className="flex-1 p-4 sm:p-6 overflow-auto min-w-0">
+    <div className="min-h-screen flex bg-slate-50 font-sans text-slate-900">
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <div className="flex flex-col flex-1 min-w-0">
+        <Header onMenuClick={() => setSidebarOpen(true)} />
+        <main className="flex-1 p-6 lg:p-10 overflow-auto">
           <Outlet />
         </main>
-        {sidebarOpen && (
-          <button
-            type="button"
-            aria-label="Close menu"
-            className="fixed inset-0 bg-black/40 z-30 md:hidden"
-            onClick={() => setSidebarOpen(false)}
-          />
-        )}
       </div>
+      {sidebarOpen && (
+        <button
+          type="button"
+          aria-label="Close menu"
+          className="fixed inset-0 bg-slate-900/50 z-30 lg:hidden backdrop-blur-sm cursor-default"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
     </div>
   );
 }

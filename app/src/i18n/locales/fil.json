@@ -13,6 +13,7 @@
   "services": {
     "heading": "Ano ang Aming Iniaalok",
     "subtitle": "Dalubhasa kami sa paglalagay ng mga bihasang manggagawa sa mga sektor na may mataas na demand sa Albania at sa ibang bansa.",
+    "disclaimer": "Nagsisilbi kaming tagapamagitan, na tumutulong sa iyo na makahanap at mag-apply para sa mga pagkakataon sa trabaho habang nagbibigay ng suporta sa buong proseso. Gayunpaman, ang lahat ng desisyon sa pag-hire ay ginagawa lamang ng mga employer, at hindi namin magagarantiyahan ang trabaho o paglalagay sa trabaho.",
     "construction": {
       "title": "Mga Trabaho sa Konstruksiyon",
       "desc": "Buong suporta para sa lokal na paglalagay sa trabaho, dokumentasyon, at residensiya."
@@ -100,7 +101,8 @@
     "error_invalid_booking_time": "Hindi wasto ang oras ng appointment. Pakisuri ang napiling oras.",
     "error_end_after_start": "Dapat mas huli ang oras ng pagtatapos kaysa sa oras ng pagsisimula.",
     "submit": "Magbayad {{price}} at Isumite",
-    "processing": "Pinoproseso..."
+    "processing": "Pinoproseso...",
+    "payment_reminder": "Ang mga hindi bayad na aplikasyon ay hindi ipoproseso. Pakikumpleto ang bayad sa susunod na screen para magpatuloy."
   },
   "payment": {
     "title": "Kumpletuhin ang Bayad",

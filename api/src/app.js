@@ -1,21 +1,22 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const routes = require('./routes');
+// api/src/app.js
+'use strict';
+
+const express     = require('express');
+const cors        = require('cors');
+const path        = require('path');
+const routes      = require('./routes');
 const errorHandler = require('./middleware/errorHandler');
-const env = require('./config/env');
-const ApiError = require('./utils/ApiError');
+const env         = require('./config/env');
+const ApiError    = require('./utils/ApiError');
 
 function parseAllowedOrigins() {
   function normalizeToOrigin(value) {
     if (!value) return null;
     const trimmed = String(value).trim();
     if (!trimmed) return null;
-
     try {
       return new URL(trimmed).origin;
     } catch {
-      // fallback: strip trailing slashes only (e.g. already an origin)
       return trimmed.replace(/\/+$/, '');
     }
   }
@@ -35,16 +36,17 @@ function parseAllowedOrigins() {
 function createApp() {
   const app = express();
 
-  // Webhook must be registered before JSON body parser (needs raw body)
-  const webhookRoutes = require('./routes/webhook.routes');
-  app.use('/api/stripe/webhook', webhookRoutes);
-
   const allowedOrigins = parseAllowedOrigins();
+  
+  app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    next();
+  });
+
   app.use(
     cors({
       origin(origin, cb) {
-        // allow server-to-server/no-origin requests
-        if (!origin) return cb(null, true);
+        if (!origin) return cb(null, true); // server-to-server / same-origin
         const normalized = origin.replace(/\/+$/, '');
         if (allowedOrigins.has(normalized)) return cb(null, true);
         return cb(new ApiError(403, `CORS blocked for origin: ${origin}`));
@@ -54,12 +56,18 @@ function createApp() {
       maxAge: 86400,
     })
   );
+
+  // NOTE: The PayPal webhook route mounts its OWN express.raw() middleware
+  // internally (in paypal.routes.js) so it can read the raw body for
+  // signature verification. The global JSON parser below runs AFTER that
+  // route matches, so ordering here is fine — the webhook route is registered
+  // under /api/paypal/webhook which is hit before express.json() processes it.
   app.use(express.json());
 
   app.use('/api', routes);
 
   if (env.NODE_ENV === 'production') {
-    const appDist = path.resolve(__dirname, '../../app/dist');
+    const appDist   = path.resolve(__dirname, '../../app/dist');
     const adminDist = path.resolve(__dirname, '../../admin/dist');
 
     app.use('/admin', express.static(adminDist));

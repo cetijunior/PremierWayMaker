@@ -13,6 +13,7 @@
   "services": {
     "heading": "What We Offer",
     "subtitle": "We specialize in placing skilled workers in high-demand sectors across Albania and abroad.",
+    "disclaimer": "We act as an intermediary, helping you find and apply for job opportunities while providing support throughout the process. However, all hiring decisions are made solely by employers, and we cannot guarantee employment or job placement.",
     "construction": {
       "title": "Construction Jobs",
       "desc": "Full support for local job placement, documentation, and residency."
@@ -102,12 +103,16 @@
     "error_invalid_booking_time": "Invalid booking time. Please check your selected time.",
     "error_end_after_start": "End time must be after start time.",
     "submit": "Pay {{price}} & Submit",
-    "processing": "Processing..."
+    "processing": "Processing...",
+    "payment_reminder": "Unpaid applications will not be processed. Please complete the payment on the next screen to proceed."
   },
   "payment": {
     "title": "Complete Payment",
     "subtitle": "Your application has been saved. Complete the payment below to finalize.",
-    "back": "Back to Application"
+    "back": "Back to Application",
+    "paypal_cta": "PayPal is currently the primary checkout option. Continue securely to complete your payment.",
+    "paypal_button": "Continue with PayPal",
+    "order_id": "Order ID"
   },
   "success": {
     "loading": "Loading...",

@@ -49,6 +49,9 @@ export default function ServiceGrid() {
           <p className="text-text-light max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
             {t('services.subtitle')}
           </p>
+          <p className="mt-4 text-xs md:text-sm text-slate-500 max-w-3xl mx-auto italic leading-relaxed border-t border-slate-200 pt-4">
+            {t('services.disclaimer')}
+          </p>
         </motion.div>
 
         <motion.div

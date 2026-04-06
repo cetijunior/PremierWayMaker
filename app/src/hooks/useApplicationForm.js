@@ -1,3 +1,4 @@
+// app/src/hooks/useApplicationForm.js
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +7,7 @@ import { submitApplication } from '../services/api';
 export function useApplicationForm(type) {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
   const [form, setForm] = useState({
     fullName: '',
     email: '',
@@ -23,10 +25,8 @@ export function useApplicationForm(type) {
 
     if (name === 'bookingDate') {
       const bookingDateObj = new Date(`${value}T00:00`);
-
       if (!Number.isNaN(bookingDateObj.getTime())) {
-        const dayOfWeek = bookingDateObj.getDay(); // 0 = Sunday, 6 = Saturday
-
+        const dayOfWeek = bookingDateObj.getDay();
         if (dayOfWeek === 0 || dayOfWeek === 6) {
           setError(t('form.error_weekday_only'));
           setForm((prev) => ({ ...prev, bookingDate: '' }));
@@ -35,17 +35,20 @@ export function useApplicationForm(type) {
       }
     }
 
+    setError('');
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
   function handleFileChange(file) {
     setCv(file);
+    setError('');
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
 
+    // --- Client-side validation ---
     if (
       !form.fullName ||
       !form.email ||
@@ -60,83 +63,71 @@ export function useApplicationForm(type) {
       return setError(t('form.error_upload_cv'));
     }
 
-    // Basic weekday and business-hours checks in browser local time
     const bookingDateObj = new Date(`${form.bookingDate}T00:00`);
-
     if (Number.isNaN(bookingDateObj.getTime())) {
       return setError(t('form.error_invalid_booking_date'));
     }
 
-    const dayOfWeek = bookingDateObj.getDay(); // 0 = Sunday, 6 = Saturday
+    const dayOfWeek = bookingDateObj.getDay();
     if (dayOfWeek === 0 || dayOfWeek === 6) {
       return setError(t('form.error_weekday_only'));
     }
 
-    const [startHourStr, startMinuteStr] = form.bookingStartTime.split(':');
-    const [endHourStr, endMinuteStr] = form.bookingEndTime.split(':');
-
-    const startHour = Number(startHourStr);
-    const startMinute = Number(startMinuteStr);
-    const endHour = Number(endHourStr);
-    const endMinute = Number(endMinuteStr);
+    const [startHour, startMinute] = form.bookingStartTime.split(':').map(Number);
+    const [endHour, endMinute]     = form.bookingEndTime.split(':').map(Number);
 
     if (
-      Number.isNaN(startHour) ||
-      Number.isNaN(startMinute) ||
-      Number.isNaN(endHour) ||
-      Number.isNaN(endMinute)
+      [startHour, startMinute, endHour, endMinute].some((n) => Number.isNaN(n))
     ) {
       return setError(t('form.error_invalid_booking_time'));
     }
 
-    const startTotalMinutes = startHour * 60 + startMinute;
-    const endTotalMinutes = endHour * 60 + endMinute;
-    const openMinutes = 8 * 60; // 08:00
-    const closeMinutes = 18 * 60; // 18:00
+    const startTotal = startHour * 60 + startMinute;
+    const endTotal   = endHour   * 60 + endMinute;
+    const OPEN  = 8  * 60;
+    const CLOSE = 18 * 60;
 
-    if (
-      startTotalMinutes < openMinutes ||
-      startTotalMinutes >= closeMinutes ||
-      endTotalMinutes <= openMinutes ||
-      endTotalMinutes > closeMinutes
-    ) {
+    if (startTotal < OPEN || startTotal >= CLOSE || endTotal <= OPEN || endTotal > CLOSE) {
       return setError(t('form.error_weekday_only'));
     }
-
-    if (endTotalMinutes <= startTotalMinutes) {
+    if (endTotal <= startTotal) {
       return setError(t('form.error_end_after_start'));
     }
 
-    // Build start/end ISO strings from date + time inputs.
     const startIso = new Date(`${form.bookingDate}T${form.bookingStartTime}`).toISOString();
-    const endIso = new Date(`${form.bookingDate}T${form.bookingEndTime}`).toISOString();
+    const endIso   = new Date(`${form.bookingDate}T${form.bookingEndTime}`).toISOString();
 
-    if (Number.isNaN(new Date(startIso).getTime()) || Number.isNaN(new Date(endIso).getTime())) {
+    if (
+      Number.isNaN(new Date(startIso).getTime()) ||
+      Number.isNaN(new Date(endIso).getTime())
+    ) {
       return setError(t('form.error_invalid_booking_time'));
     }
 
-    if (new Date(startIso) >= new Date(endIso)) {
-      return setError(t('form.error_end_after_start'));
-    }
-
+    // --- Submit to API ---
     setLoading(true);
     try {
-      const data = new FormData();
-      data.append('fullName', form.fullName);
-      data.append('email', form.email);
-      data.append('phone', form.phone);
-      data.append('type', type);
-      data.append('bookingStart', startIso);
-      data.append('bookingEnd', endIso);
-      data.append('cv', cv);
+      const formData = new FormData();
+      formData.append('fullName',     form.fullName);
+      formData.append('email',        form.email);
+      formData.append('phone',        form.phone);
+      formData.append('type',         type);
+      formData.append('bookingStart', startIso);
+      formData.append('bookingEnd',   endIso);
+      formData.append('cv',           cv);
 
-      await submitApplication(data);
+      // POST /api/apply — saves application as 'pending', returns applicationId
+      const data = await submitApplication(formData);
 
-      // Temporary: bypass payment and go directly to success page.
-      navigate('/success', {
+      const PRICES = { inside: 50, outside: 300 };
+
+      // Navigate to /payment with everything the PayPal page needs
+      navigate('/payment', {
         state: {
-          fullName: form.fullName,
+          applicationId: data.applicationId,
           type,
+          fullName: form.fullName,
+          amount: PRICES[type],
         },
       });
     } catch (err) {

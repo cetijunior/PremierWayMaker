@@ -10,7 +10,7 @@ export const CONTACT = {
     line2: 'Durrës, Albania',
     mapLink: 'https://maps.app.goo.gl/qpF1CiWGpmewaVt48?g_st=ic',
   },
-  phones: ['+355 69 373 2177'],
+  phones: ['+355 69 373 2177', '+852 6337 2063'],
   email: 'premierwaymaker@gmail.com',
   socials: {
     instagram: 'https://www.instagram.com/p_way_maker/',

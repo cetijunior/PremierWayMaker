@@ -5,6 +5,23 @@ function joinUrl(origin, path) {
 
 const API_ORIGIN = import.meta.env.VITE_API_ORIGIN || '';
 const BASE_URL = joinUrl(API_ORIGIN, '/api/admin');
+const REQUEST_TIMEOUT_MS = 12000;
+
+async function withTimeout(url, options = {}) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      throw new Error('Request timed out. Please try again.');
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
 
 function getToken() {
   return localStorage.getItem('token');
@@ -16,7 +33,7 @@ function authHeaders() {
 }
 
 export async function login(username, password) {
-  const res = await fetch(`${BASE_URL}/login`, {
+  const res = await withTimeout(`${BASE_URL}/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password }),
@@ -26,12 +43,13 @@ export async function login(username, password) {
   return data;
 }
 
-export async function fetchApplications({ type, status } = {}) {
+export async function fetchApplications({ type, status, provider } = {}) {
   const params = new URLSearchParams();
   if (type) params.set('type', type);
   if (status) params.set('status', status);
+  if (provider) params.set('provider', provider);
 
-  const res = await fetch(`${BASE_URL}/applications?${params}`, {
+  const res = await withTimeout(`${BASE_URL}/applications?${params}`, {
     headers: authHeaders(),
   });
 
@@ -46,7 +64,7 @@ export async function fetchApplications({ type, status } = {}) {
 }
 
 export async function deleteApplication(id) {
-  const res = await fetch(`${BASE_URL}/applications/${id}`, {
+  const res = await withTimeout(`${BASE_URL}/applications/${id}`, {
     method: 'DELETE',
     headers: authHeaders(),
   });

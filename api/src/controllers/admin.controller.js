@@ -33,6 +33,7 @@ async function listApplications(req, res, next) {
     const filter = {};
     if (req.query.type) filter.type = req.query.type;
     if (req.query.status) filter.paymentStatus = req.query.status;
+    if (req.query.provider) filter.paymentProvider = req.query.provider;
 
     const applications = await Application.find(filter).sort({ createdAt: -1 });
     res.json(applications);

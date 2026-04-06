@@ -2,20 +2,21 @@ import { Table, TableHead, TableHeader, TableBody } from '../ui/Table';
 import ApplicationRow from './ApplicationRow';
 import ApplicationCard from './ApplicationCard';
 
-const COLUMNS = ['Name', 'Email', 'Phone', 'Type', 'Amount', 'Status', 'Booking', 'Date', 'Actions'];
+const COLUMNS = ['Name', 'Contact', 'Type', 'Amount', 'Status', 'Booking', 'Submitted', 'Actions'];
 
-export default function ApplicationTable({ applications, onDownloadCv, onDelete, isDemo }) {
+export default function ApplicationTable({ applications, onDownloadCv, onDelete, deletingIds }) {
   if (applications.length === 0) {
     return (
-      <div className="text-center py-10 text-[#5A6A7A]">
-        No applications found.
+      <div className="text-center py-16 text-slate-500">
+        <p className="text-lg font-medium">No applications found.</p>
+        <p className="text-sm mt-1">Try adjusting your filters or wait for new submissions.</p>
       </div>
     );
   }
 
   return (
     <>
-      <div className="hidden md:block">
+      <div className="hidden xl:block">
         <Table>
           <TableHead>
             {COLUMNS.map((col) => (
@@ -29,20 +30,20 @@ export default function ApplicationTable({ applications, onDownloadCv, onDelete,
                 app={app}
                 onDownloadCv={onDownloadCv}
                 onDelete={onDelete}
-                isDemo={isDemo}
+                isDeleting={deletingIds.includes(app._id)}
               />
             ))}
           </TableBody>
         </Table>
       </div>
-      <div className="md:hidden space-y-3">
+      <div className="xl:hidden p-4 sm:p-5 space-y-4 bg-slate-50">
         {applications.map((app) => (
           <ApplicationCard
             key={app._id}
             app={app}
             onDownloadCv={onDownloadCv}
             onDelete={onDelete}
-            isDemo={isDemo}
+            isDeleting={deletingIds.includes(app._id)}
           />
         ))}
       </div>

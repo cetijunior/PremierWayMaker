@@ -1,3 +1,4 @@
+// app/src/pages/Success.jsx
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
@@ -10,38 +11,41 @@ import Button from '../components/ui/Button';
 export default function Success() {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get('session_id');
+  const sessionId = searchParams.get('session_id'); // legacy Stripe
   const location = useLocation();
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Non-Stripe flow: data will be provided via navigation state.
-    if (!sessionId && location.state && location.state.fullName) {
-      const { fullName, type } = location.state;
-      const amount = type === 'inside' ? 50 : 200;
+    const state = location.state;
 
+    // PayPal flow: navigate('/success', { state: { fullName, type, amount, ... } })
+    if (!sessionId && state?.fullName) {
       setData({
-        fullName,
-        type,
-        amount,
-        paymentStatus: 'paid',
-        bookingDate: null,
-        bookingStart: null,
-        bookingEnd: null,
+        fullName:      state.fullName,
+        type:          state.type,
+        amount:        state.amount,
+        paymentStatus: state.paymentStatus || 'paid',
+        bookingDate:   state.bookingDate   || null,
+        bookingStart:  state.bookingStart  || null,
+        bookingEnd:    state.bookingEnd    || null,
       });
       setLoading(false);
       return;
     }
 
-    if (!sessionId) {
-      setLoading(false);
+    // Legacy Stripe flow: ?session_id=xxx
+    if (sessionId) {
+      getApplicationStatus(sessionId)
+        .then(setData)
+        .catch(() => {})
+        .finally(() => setLoading(false));
       return;
     }
-    getApplicationStatus(sessionId)
-      .then(setData)
-      .catch(() => {})
-      .finally(() => setLoading(false));
+
+    // Nothing — show error
+    setLoading(false);
   }, [sessionId, location.state]);
 
   if (loading) {
@@ -76,6 +80,7 @@ export default function Success() {
         transition={{ duration: 0.5 }}
         className="max-w-md w-full text-center py-12"
       >
+        {/* Animated check */}
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -106,16 +111,16 @@ export default function Success() {
             />
           </p>
           <p className="mb-4 text-sm">
-            {t('success.payment_status')}{' '}
-            <Badge status={data.paymentStatus} />
+            {t('success.payment_status')} <Badge status={data.paymentStatus} />
           </p>
         </motion.div>
 
+        {/* Summary card */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.55 }}
-          className="bg-white inline-block px-10 py-6 rounded-2xl shadow-sm border border-gray-100 mb-6"
+          className="bg-white inline-block px-10 py-6 rounded-2xl shadow-sm border border-gray-100 mb-6 text-left"
         >
           <p className="text-sm text-text-light">
             <strong className="text-navy">{t('success.amount')}</strong> &euro;{data.amount}
@@ -123,7 +128,7 @@ export default function Success() {
           <p className="text-sm text-text-light mt-1">
             <strong className="text-navy">{t('success.type')}</strong> {typeName}
           </p>
-          {(data.bookingDate || data.bookingStart) && (
+          {(data.bookingStart || data.bookingDate) && (
             <p className="text-sm text-text-light mt-1">
               <strong className="text-navy">{t('success.booking_date')}</strong>{' '}
               {new Date(data.bookingStart || data.bookingDate).toLocaleString()}

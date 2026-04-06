@@ -13,6 +13,7 @@
   "services": {
     "heading": "Çfarë Ofrojmë",
     "subtitle": "Ne specializohemi në vendosjen e punëtorëve të aftë në sektorë me kërkesë të lartë në Shqipëri dhe jashtë.",
+    "disclaimer": "Ne veprojmë si një ndërmjetës, duke ju ndihmuar të gjeni dhe të aplikoni për mundësi pune ndërsa ofrojmë mbështetje gjatë gjithë procesit. Megjithatë, të gjitha vendimet e punësimit merren vetëm nga punëdhënësit, dhe ne nuk mund të garantojmë punësim ose vendosje në punë.",
     "construction": {
       "title": "Punë Ndërtimi",
       "desc": "Mbështetje e plotë për vendosjen në punë, dokumentacionin dhe rezidencën."
@@ -100,7 +101,8 @@
     "error_invalid_booking_time": "Ora e takimit është e pavlefshme. Ju lutemi kontrolloni orarin e zgjedhur.",
     "error_end_after_start": "Ora e përfundimit duhet të jetë pas orës së fillimit.",
     "submit": "Paguaj {{price}} & Dërgo",
-    "processing": "Duke procesuar..."
+    "processing": "Duke procesuar...",
+    "payment_reminder": "Aplikimet e papaguara nuk do të procesohen. Ju lutemi plotësoni pagesën në ekranin tjetër për të vazhduar."
   },
   "payment": {
     "title": "Përfundo Pagesën",

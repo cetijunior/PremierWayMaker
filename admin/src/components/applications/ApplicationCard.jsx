@@ -1,50 +1,59 @@
 import Badge from '../ui/Badge';
 import Button from '../ui/Button';
 
-export default function ApplicationCard({ app, onDownloadCv, onDelete, isDemo }) {
+export default function ApplicationCard({ app, onDownloadCv, onDelete, isDeleting }) {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 space-y-3">
-      <div className="flex flex-wrap justify-between items-start gap-2">
-        <h3 className="font-semibold text-[#1B2A4A]">{app.fullName}</h3>
+    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 space-y-4 hover:shadow-md transition-shadow">
+      <div className="flex flex-wrap justify-between items-center gap-3 border-b border-slate-100 pb-4">
+        <div>
+          <h3 className="text-lg font-bold text-slate-800">{app.fullName}</h3>
+          <p className="text-sm text-slate-500 mt-0.5">{app.email}</p>
+        </div>
         <Badge status={app.paymentStatus} />
       </div>
-      <dl className="grid grid-cols-1 gap-1.5 text-sm text-text-light">
+      
+      <div className="grid grid-cols-2 gap-4 text-sm">
         <div>
-          <span className="font-medium text-[#1B2A4A]">Email:</span> {app.email}
+          <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Phone</p>
+          <p className="text-slate-700 font-medium">{app.phone}</p>
         </div>
         <div>
-          <span className="font-medium text-[#1B2A4A]">Phone:</span> {app.phone}
+          <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Type</p>
+          <p className="text-slate-700 font-medium">{app.type === 'inside' ? 'Inside Albania' : 'Outside Albania'}</p>
         </div>
         <div>
-          <span className="font-medium text-[#1B2A4A]">Type:</span> {app.type === 'inside' ? 'Inside' : 'Outside'}
+          <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Payment</p>
+          <p className="text-slate-700 font-medium">€{app.amount} <span className="text-[10px] text-slate-400 uppercase tracking-wider block">{app.paymentProvider || 'pending'}</span></p>
         </div>
         <div>
-          <span className="font-medium text-[#1B2A4A]">Amount:</span> €{app.amount}
+          <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Booking</p>
+          {app.bookingStart ? (
+             <div>
+               <p className="text-slate-700 font-medium">{new Date(app.bookingStart).toLocaleDateString()}</p>
+               <p className="text-xs text-slate-500">{new Date(app.bookingStart).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+             </div>
+          ) : (
+             <p className="text-slate-700 font-medium">{app.bookingDate ? new Date(app.bookingDate).toLocaleDateString() : '—'}</p>
+          )}
         </div>
-        <div>
-          <span className="font-medium text-[#1B2A4A]">Booking:</span>{' '}
-          {app.bookingStart
-            ? new Date(app.bookingStart).toLocaleString()
-            : app.bookingDate
-            ? new Date(app.bookingDate).toLocaleDateString()
-            : '—'}
+      </div>
+      
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100">
+        <p className="text-xs text-slate-400">Submitted: {new Date(app.createdAt).toLocaleDateString()}</p>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => onDownloadCv(app._id)}
+            disabled={isDeleting}
+            className="border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 font-medium"
+          >
+            Download CV
+          </Button>
+          <Button variant="danger" size="sm" onClick={() => onDelete(app._id)} disabled={isDeleting}>
+            {isDeleting ? '...' : 'Delete'}
+          </Button>
         </div>
-        <div>
-          <span className="font-medium text-[#1B2A4A]">Submitted:</span> {new Date(app.createdAt).toLocaleDateString()}
-        </div>
-      </dl>
-      <div className="flex flex-wrap gap-2 pt-2">
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={() => onDownloadCv(app._id)}
-          disabled={isDemo}
-        >
-          CV
-        </Button>
-        <Button variant="danger" size="sm" onClick={() => onDelete(app._id)}>
-          Delete
-        </Button>
       </div>
     </div>
   );

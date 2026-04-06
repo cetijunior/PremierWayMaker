@@ -219,6 +219,9 @@ export default function ApplicationForm({
             <Button type="submit" className="w-full py-3.5 text-base mt-3" disabled={loading}>
               {loading ? t('form.processing') : t('form.submit', { price: priceLabel })}
             </Button>
+            <p className="mt-3 text-[10px] sm:text-xs text-text-light/70 text-center leading-relaxed">
+              {t('form.payment_reminder')}
+            </p>
           </motion.div>
         </section>
       </div>

@@ -139,23 +139,28 @@ export default function Navbar() {
               {/* Quick Contact Bottom Section */}
               <div className="mt-auto p-5 border-t border-white/10 bg-white/5">
                 <p className="text-xs text-white/40 uppercase tracking-wider mb-3 font-medium">Quick Contact</p>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="flex flex-col gap-3">
                   <a
                     href={CONTACT.socials.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white py-3 rounded-xl transition-all font-medium text-sm border border-[#25D366]/20 hover:border-transparent"
+                    className="flex items-center justify-center gap-2 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white py-3 rounded-xl transition-all font-medium text-sm border border-[#25D366]/20 hover:border-transparent w-full"
                   >
                     <FaWhatsapp className="w-4 h-4" />
                     {t('contact.whatsapp')}
                   </a>
-                  <a
-                    href={`tel:${CONTACT.phones[0].replace(/\s+/g, '')}`}
-                    className="flex items-center justify-center gap-2 bg-white/5 text-white hover:bg-gold hover:text-navy py-3 rounded-xl transition-all font-medium text-sm border border-white/10 hover:border-transparent"
-                  >
-                    <HiPhone className="w-4 h-4" />
-                    {t('contact.call_us')}
-                  </a>
+                  <div className="grid grid-cols-1 gap-2">
+                    {CONTACT.phones.map((phone, idx) => (
+                      <a
+                        key={idx}
+                        href={`tel:${phone.replace(/\s+/g, '')}`}
+                        className="flex items-center justify-center gap-2 bg-white/5 text-white hover:bg-gold hover:text-navy py-3 rounded-xl transition-all font-medium text-sm border border-white/10 hover:border-transparent w-full"
+                      >
+                        <HiPhone className="w-4 h-4" />
+                        {phone}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>
