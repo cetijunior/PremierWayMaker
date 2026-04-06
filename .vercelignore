@@ -1,5 +1,0 @@
-# Ignore files in api/src from becoming independent Serverless Functions.
-# Vercel's zero-config behavior turns all .js files in api/ into individual functions.
-# api/index.js will still be able to require these files.
-api/src/**
-api/node_modules/**
